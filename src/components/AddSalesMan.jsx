@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React from "react";
 import { salesManSchema } from "../Schemas";
 
 function AddSalesMan() {
@@ -27,6 +27,7 @@ function AddSalesMan() {
         'content-type':'application/json'
       }
     })
+    result=await result.json()
   }
   return (
     <>

@@ -4,7 +4,6 @@ import { RiBillLine } from "react-icons/ri";
 
 export default function Header() {
   const [rotate, setRotate] = useState(false);
-  const [show, setShow] = useState(false);
   const data = JSON.parse(localStorage.getItem("signin"));
   // console.log("header data",data.name)
   return (
@@ -27,7 +26,7 @@ export default function Header() {
                     to="/pos"
                     className="flex  item-center justify-center  text-white  rounded "
                   >
-                    <RiBillLine size={20} className='ml-1' />
+                    <RiBillLine size={20} className="ml-1" />
                     POS
                   </NavLink>
                 </div>
@@ -36,7 +35,7 @@ export default function Header() {
                     <img
                       className="w-10 h-10 "
                       src="https://i.ibb.co/QMddNDb/Ellipse-14.png"
-                      alt="individual person image-3"
+                      alt="individual person "
                     />
                     <div className="ml-2">
                       <p className="text-lg leading-4 font-semibold ">
@@ -253,7 +252,7 @@ export default function Header() {
               <img
                 className="w-10 h-10 "
                 src="https://i.ibb.co/QMddNDb/Ellipse-14.png"
-                alt="individual person image-3"
+                alt="individual person "
               />
               <div className="ml-2">
                 <p className="text-lg leading-4 font-semibold text-gray-800">

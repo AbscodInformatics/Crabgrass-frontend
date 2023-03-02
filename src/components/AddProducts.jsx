@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React from "react";
 import { productSchema } from "../Schemas";
 
 function AddProducts() {

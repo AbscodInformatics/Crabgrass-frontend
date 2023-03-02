@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import Routing from "./Routing";
@@ -11,7 +11,7 @@ const DashBoard = () => {
   // console.log("params",pathname)
   return (
     <>
-     {pathname=='/pos' ? <POS/> : <div>
+     {pathname==='/pos' ? <POS/> : <div>
         <Header />
         <div className="flex ">
           <div className="  ">

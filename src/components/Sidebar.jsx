@@ -18,7 +18,7 @@ export default function Sidebar() {
             <ul className="rounded  mt-8 pb-6">
               <li className="focus:bg-blue-300  rounded flex w-full justify-between text-white leading-none cursor-pointer items-center py-3 px-4 hover:bg-blue-400 ">
                 <a
-                  href="javascript:void(0)"
+                  href=""
                   className="flex items-center rounded focus:outline-none   "
                 >
                   <svg

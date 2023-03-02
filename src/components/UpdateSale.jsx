@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 
 function UpdateSale() {
     const params=useParams();
-    const [data,setData]=useState()
     useEffect(()=>{
        getSaleDetail();
     },[])
@@ -13,8 +12,7 @@ function UpdateSale() {
     const getSaleDetail=async()=>{
         let resp=await fetch(`http://localhost:4000/sale/${params.id}`)
         let result=await resp.json();
-   
-        setData(result)
+
          
         values.date=result.date
         values.biller_name=result.biller_name

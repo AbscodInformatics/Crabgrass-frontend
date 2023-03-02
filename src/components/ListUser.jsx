@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 function ListUser() {
   const [data, setData] = useState([]);
-  const [show, setShow] = useState(null);
   const navigate = useNavigate();
 
 

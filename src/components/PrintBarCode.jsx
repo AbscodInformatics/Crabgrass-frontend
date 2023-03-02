@@ -81,7 +81,6 @@ const PrintBarCode = () => {
                 <div
                   style={{
                     zIndex: "2",
-                    Height: "200px",
                     top: "50px",
                     position: "absolute",
                     background: "white",

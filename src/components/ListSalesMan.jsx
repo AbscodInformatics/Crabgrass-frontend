@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 function ListSalesMan() {
   const navigate = useNavigate();
-  const [show, setShow] = useState(null);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -16,9 +15,9 @@ function ListSalesMan() {
     });
     result = await result.json();
     console.log("delete", result);
-    if(result){
-        alert('Data Deleted');
-        apiData();
+    if (result) {
+      alert("Data Deleted");
+      apiData();
     }
   };
 

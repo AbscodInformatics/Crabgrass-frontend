@@ -1,6 +1,5 @@
-import { parse } from "postcss";
 import React, { useState } from "react";
-import { json, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ function SignIn() {
       },
     });
     result= await result.json();
-    if(result.email == signInDetail.email){
+    if(result.email === signInDetail.email){
     localStorage.setItem('signin',JSON.stringify(result))
       navigate('/dashboard')
     }
@@ -52,7 +51,6 @@ function SignIn() {
         <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
           <p
             tabIndex={0}
-            role="heading"
             aria-label="Login to your account"
             className="text-2xl font-extrabold leading-6 text-gray-800"
           >
@@ -70,7 +68,7 @@ function SignIn() {
             <input
               placeholder="Enter email adress"
               required
-              role="input"
+             
               type="email"
               name="email"
               onChange={(e)=>updateHandler(e)}
@@ -85,7 +83,7 @@ function SignIn() {
               <input
                 placeholder="Enter Password"
                 required
-                role="input"
+              
                 type="password"
                 name="password"
                 onChange={(e)=>updateHandler(e)}
@@ -109,7 +107,7 @@ function SignIn() {
           </div>
           <div className="mt-8">
             <button
-              role="button"
+            
               onClick={() => submitHandler()}
               aria-label="create my account"
               className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"
