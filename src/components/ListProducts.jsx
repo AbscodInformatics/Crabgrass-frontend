@@ -86,7 +86,7 @@ function ListProducts() {
               <div className="w-40 py-2 px-3 bg-white lg:ml-3 border rounded border-gray-200">
                 <select
                   className="w-full text-sm leading-3 text-gray-500 focus:outline-none"
-                  onChange={(e) => setSort(e.target.value)}
+                  
                 >
                   <option value="SYD">Sort by Date</option>
                   <option value="SYP">Sort by Price </option>

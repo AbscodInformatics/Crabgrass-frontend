@@ -72,7 +72,6 @@ export default function Header() {
                   className=" focus:outline-none focus:ring focus:ring-offset-2 focus:ring-gray-800 block sm:hidden cursor-pointer lg:pr-7 sm:pr-6 py-6 pr-4"
                 >
                   <svg
-                    className={`${show ? "hidden" : ""}`}
                     width={24}
                     height={24}
                     viewBox="0 0 24 24"
@@ -104,7 +103,6 @@ export default function Header() {
                     />
                   </svg>
                   <svg
-                    className={`${show ? "" : "hidden"} `}
                     width={24}
                     height={24}
                     viewBox="0 0 24 24"
@@ -176,9 +174,7 @@ export default function Header() {
         {/* Mobile and Small devices Navigation */}
         <div
           id="MobileNavigation"
-          className={`${
-            show ? "" : "hidden"
-          } transform duration-150 sm:hidden h-full bg-white `}
+        
         >
           <div className=" flex flex-col justify-between h-auto ">
             <div className=" flex flex-col lg:px-7 sm:px-6 px-4">
