@@ -210,17 +210,17 @@ const PrintBarCode = () => {
               <FcPrint size={28}  /> Print
             </button>
           </div>
-          <div className="grid grid-cols-3   w-96 mt-1 " ref={componentRef}>
+          <div className="grid grid-cols-3 mt-1 " ref={componentRef} style={{width:'384.96px'}}>
             {cart.map((item) => {
               {/* console.log(typeof(item._id)) */}
-              let dummy=item._id.slice(15,-1)
+              {/* let dummy=item._id.slice(15,-1) */}
 
               return (
-                <p className="  flex  pl-1  w-32  h-20 bg-white"  >
+                <p className="  flex  pl-1 mr-1 bg-white"  style={{height:'86.4px',width:'120px'}}>
                    <div className="flex flex-col items-center" >
                    <span className="pb-0 mb-0 pr-1 text-sm">Crabgrass</span>
                    {/* <span className="p-0 mt-0 text-sm">Price: {item.price}</span> */}
-                  <Barcode value={dummy} height={35}  width={1} font={0.7} textMargin={1} fontSize={10}  margin={0}  displayValue={true}/>
+                  <Barcode value={(item._id.slice(15))} height={35}  width={0.9} font={0.7} textMargin={1} fontSize={10}  margin={0}  displayValue={true}/>
 
                    </div>
                 </p>
