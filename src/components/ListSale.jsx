@@ -28,7 +28,7 @@ function ListSale() {
       method:'Delete'
     })
     // result=await result.json();
-    if(result.status==200){
+    if(result.status===200){
       alert("Data Deleted")
       getData();
     }
@@ -140,6 +140,7 @@ function ListSale() {
                       <div className="w-20 h-6 flex items-center mr-16 justify-center ">
                         <p className="text-xs leading-3 ">{item.product}</p>
                       </div>
+                      
                     </td>
 
                     <td>

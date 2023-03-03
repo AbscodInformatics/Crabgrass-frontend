@@ -7,7 +7,7 @@ export default function Header() {
   const data = JSON.parse(localStorage.getItem("signin"));
   // console.log("header data",data.name)
   return (
-    <div className=" ">
+    <div className=" w-full z-10 ">
       <div className=" h-full relative">
         <div className="bg-black text-white">
           <div className="1xl:container 2xl:mx-auto">
@@ -127,7 +127,7 @@ export default function Header() {
                 </div>
               </div>
               {/* for medium-sized devices */}
-              <div className="lg:hidden hidden sm:flex flex-col lg:px-7 sm:px-6 px-4 ">
+              {/* <div className="lg:hidden hidden sm:flex flex-col lg:px-7 sm:px-6 px-4 ">
                 <hr className=" w-full bg-gray-200 " />
                 <div className="lg:hidden flex flex-auto justify-between mt-3 flex-row pb-4">
                   <div className>
@@ -167,12 +167,12 @@ export default function Header() {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </nav>
           </div>
         </div>
         {/* Mobile and Small devices Navigation */}
-        <div
+        {/* <div
           id="MobileNavigation"
         
         >
@@ -277,7 +277,7 @@ export default function Header() {
               </svg>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

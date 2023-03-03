@@ -17,7 +17,7 @@ const DashBoard = () => {
           <div className="  ">
             <Sidebar />
           </div>
-          <div className="w-5/6 ">
+          <div className="w-5/6  ">
             <Routing />
           </div>
         </div>

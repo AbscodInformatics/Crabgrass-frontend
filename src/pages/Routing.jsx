@@ -19,9 +19,10 @@ import POS from '../components/POS';
 import PrintSlip from '../components/PrintSlip'
 import UpdateProduct from '../components/UpdateProduct'
 import UpdateSale from '../components/UpdateSale'
+import DashBoard from "./DashBoard";
 const Routing = () => {
   return (
-    <Routes> 
+    <Routes>      
       <Route path="/listproducts" element={<ListProducts />} />
       <Route path="/addproduct" element={<AddProducts />} />
       <Route path="/listsale" element={<ListSale />} />

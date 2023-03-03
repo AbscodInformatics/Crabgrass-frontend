@@ -27,7 +27,7 @@ function AddSalesMan() {
         'content-type':'application/json'
       }
     })
-    result=await result.json()
+    await result.json()
   }
   return (
     <>
