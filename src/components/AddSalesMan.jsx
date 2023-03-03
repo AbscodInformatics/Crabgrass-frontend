@@ -20,7 +20,7 @@ function AddSalesMan() {
   })
 
   const apiData=async(data)=>{
-    let result =await fetch('http://localhost:4000/add-salesman',{
+    let result =await fetch('https://crabgrassbackend.onrender.com/add-salesman',{
       method:'POST',
       body:JSON.stringify(data),
       headers:{

@@ -21,7 +21,7 @@ function AddSale() {
     });
 
   const apiData = async (data) => {
-    let result = await fetch("http://localhost:4000/add-sale", {
+    let result = await fetch("https://crabgrassbackend.onrender.com/add-sale", {
       method: "post",
       body: JSON.stringify(data),
       headers: {

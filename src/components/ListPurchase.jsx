@@ -8,7 +8,7 @@ function ListPurchase() {
    getData();
   },[])
   const getData=async()=>{
- let result=await fetch('http://localhost:4000/purchase')
+ let result=await fetch('https://crabgrassbackend.onrender.com/purchase')
  result=await result.json();
  setData([...result]);
   }

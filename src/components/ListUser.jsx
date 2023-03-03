@@ -12,13 +12,13 @@ function ListUser() {
   }, []);
 
   const apiData = async () => {
-    let result = await fetch("http://localhost:4000/user");
+    let result = await fetch("https://crabgrassbackend.onrender.com/user");
     result = await result.json();
     setData(result);
   };
 
   const deleteHandler = async (id) => {
-    let result = await fetch(`http://localhost:4000/user/${id}`, {
+    let result = await fetch(`https://crabgrassbackend.onrender.com/user/${id}`, {
       method: "Delete",
     });
     result = await result.json();

@@ -12,7 +12,7 @@ function ListProducts() {
   }, []);
 
   const getData = async () => {
-    let result = await fetch("http://localhost:4000/products");
+    let result = await fetch("https://crabgrassbackend.onrender.com/products");
     result = await result.json();
     setApiData(result);
     setData(result);
@@ -20,7 +20,7 @@ function ListProducts() {
   // console.log("result", data);
 
   const deleteHandler = async (id) => {
-    let result = await fetch(`http://localhost:4000/product/${id}`, {
+    let result = await fetch(`https://crabgrassbackend.onrender.com/product/${id}`, {
       method: "DELETE",
     });
     if (result.status === 200) {

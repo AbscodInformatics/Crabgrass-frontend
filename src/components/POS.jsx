@@ -16,7 +16,7 @@ function POS() {
    },[])
 
    const getData=async()=>{
-    let result=await fetch('http://localhost:4000/products');
+    let result=await fetch('https://crabgrassbackend.onrender.com/products');
     result=await result.json();
     setData([...result])
    }

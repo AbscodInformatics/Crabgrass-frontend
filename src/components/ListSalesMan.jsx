@@ -10,7 +10,7 @@ function ListSalesMan() {
   }, []);
 
   const deleteHandler = async (id) => {
-    let result = await fetch(`http://localhost:4000/salesman/${id}`, {
+    let result = await fetch(`https://crabgrassbackend.onrender.com/salesman/${id}`, {
       method: "Delete",
     });
     result = await result.json();
@@ -22,7 +22,7 @@ function ListSalesMan() {
   };
 
   const apiData = async () => {
-    let result = await fetch("http://localhost:4000/salesman");
+    let result = await fetch("https://crabgrassbackend.onrender.com/salesman");
     result = await result.json();
     setData(result);
   };

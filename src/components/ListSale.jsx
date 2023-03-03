@@ -17,7 +17,7 @@ function ListSale() {
   },[search]);
 
   const getData = async () => {
-    let result = await fetch("http://localhost:4000/sale");
+    let result = await fetch("https://crabgrassbackend.onrender.com/sale");
     result = await result.json();
     setApiData(result)
     setData(result);

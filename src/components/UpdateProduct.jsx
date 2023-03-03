@@ -12,7 +12,7 @@ function UpdateProduct() {
        getProductDetails()
     },[])
     const getProductDetails=async()=>{
-     let result=await fetch(`http://localhost:4000/product/${params.id}`)
+     let result=await fetch(`https://crabgrassbackend.onrender.com/${params.id}`)
      result=await result.json();
      setData(result)
     
@@ -26,7 +26,7 @@ function UpdateProduct() {
     values.size=result.size
 
     }
-    console.log("data",data)
+    // console.log("data",data)
   const { errors, values, handleSubmit, handleChange, handleBlur, touched } =
     useFormik({
       initialValues: {
@@ -48,7 +48,7 @@ function UpdateProduct() {
     });
 
   const apiData = async (data) => {
-    let result = await fetch(`http://localhost:4000/product/${params.id}`, {
+    let result = await fetch(`https://crabgrassbackend.onrender.com/${params.id}`, {
       method: "PUT",
       body: JSON.stringify(data),
       headers: {

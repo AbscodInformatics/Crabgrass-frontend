@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 function UpdateSale() {
   const navigate = useNavigate();
   const params = useParams();
-  const [sale, setSale] = useState('');
+  const [sale, setSale] = useState();
 
   const { errors, values, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
@@ -27,7 +27,7 @@ function UpdateSale() {
 
   useEffect(() => {
     const getSaleDetail = async () => {
-      let resp = await fetch(`http://localhost:4000/sale/${params.id}`);
+      let resp = await fetch(`https://crabgrassbackend.onrender.com/sale/${params.id}`);
       let result = await resp.json();
       setSale(result);
       values.date = result.date;
@@ -40,6 +40,7 @@ function UpdateSale() {
     getSaleDetail();
 
   }, []);
+  
   const apiData = async (data) => {
     console.log(data)
     // let result = await fetch(`http://localhost:4000/sale/${params.id}`, {
