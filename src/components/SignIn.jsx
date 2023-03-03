@@ -36,7 +36,7 @@ function SignIn() {
     result = await result.json();
     if (result.email === signInDetail.email) {
       localStorage.setItem("signin", JSON.stringify(result));
-      navigate("/dashboard");
+      navigate("/pos");
       window.location.reload(true);
     } else {
       setErr(true);
