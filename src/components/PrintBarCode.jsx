@@ -219,13 +219,13 @@ const PrintBarCode = () => {
               <FcPrint size={28}  /> Print
             </button>
           </div>
-          <div className="flex flex-col m-1 " ref={componentRef} style={{width:'384.96px'}}>
+          <div className="flex flex-col m-1 pl-2 " ref={componentRef} style={{width:'384.96px'}}>
             {cart.map((item) => {
               {/* console.log(typeof(item._id)) */}
               {/* let dummy=item._id.slice(15,-1) */}
 
               return (
-                <p className="  flex  pl-1  bg-white border-2"  style={{height:'188px',width:'188px'}}>
+                <p className="  flex  pl-3  bg-white "  style={{height:'188px',width:'188px'}}>
                    <div className="flex flex-col items-center" >
                    <span className="pb-0 mb-0 pl-4 text-xl ">Crabgrass</span>
                    <span>Price:{item.price}</span>
