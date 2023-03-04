@@ -124,9 +124,10 @@ function ListProducts() {
                 onClick={() => navigate("/addproduct")}
                 className="inline-flex ml-1.5 items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
               >
-                <p className="text-sm font-medium leading-none text-white">
+                <p className="text-sm font-medium leading-none text-white  ">
+                
                   Add Product
-                </p>
+                </p> 
               </button>
             </div>
           </div>

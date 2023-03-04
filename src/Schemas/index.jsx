@@ -61,7 +61,14 @@ export const userSchema = Yup.object({
   name: Yup.string().min(3).max(20).required("Enter User name"),
   email: Yup.string().email().required("Enter Email"),
   contact: Yup.number().required("Enter Contact"),
-  address: Yup.string().min(3).max(20).required("Enter Address"),
-  password: Yup.string().min(3).max(20).required("Enter Password"),
-  confirm_password: Yup.string().required("Confirm Password"),
+  address: Yup.string().min(3).max(20).required(),
+  password: Yup.string()
+    .min(4)
+    .max(12)
+    .required("Enter Password"),
+   
+
+  confirm_password: Yup.string()
+    .required()
+    .oneOf([Yup.ref("password"), null], "password must match"),
 });

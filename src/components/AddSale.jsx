@@ -1,10 +1,12 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { saleSchema } from "../Schemas";
+import Notification from "./alerts/Notificaion";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
 function AddSale() {
+  const [showNotification,setShowNotification]=useState(false)
   const { errors, values, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
@@ -18,6 +20,7 @@ function AddSale() {
       validationSchema: saleSchema,
       onSubmit: (values, action) => {
         apiData(values);
+        setShowNotification(true)
         action.resetForm();
       },
     });
@@ -206,7 +209,7 @@ function AddSale() {
           </div>
         </div>
       </div>
-      
+       <Notification  show={showNotification} setShow={setShowNotification} value={'Data added Successfully!'} msg={''}/>
     </>
   );
 }

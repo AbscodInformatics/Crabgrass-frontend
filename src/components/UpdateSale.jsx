@@ -4,12 +4,13 @@ import { saleSchema } from "../Schemas";
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import Notification from "./alerts/Notificaion";
 
 function UpdateSale() {
   const navigate = useNavigate();
   const params = useParams();
   const [sale, setSale] = useState();
-
+  const [showNotification,setShowNotification]=useState(false)
   const { errors, values, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
@@ -22,8 +23,9 @@ function UpdateSale() {
       },
       validationSchema: saleSchema,
       onSubmit: (values, action) => {
+        setShowNotification(true)
         apiData(values);
-        navigate("/listsale");
+        
       },
     });
 
@@ -44,8 +46,9 @@ function UpdateSale() {
   }, []);
   
   const apiData = async (data) => {
-    // console.log(data)
-    let result = await fetch(`http://localhost:4000/sale/${params.id}`, {
+    // console.log("data",params.id)
+   
+    let result = await fetch(`https://crabgrassbackend.onrender.com/sale/${params.id}`, {
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
@@ -53,13 +56,22 @@ function UpdateSale() {
       },
     });
     result = await result.json();
-    console.log("result", result);
+    if(result.acknowledged){
+     
+        setShowNotification(false)
+      navigate("/listsale")
+      
+    
+    }
+    
+     
+    // console.log("result", result.acknowledged);
   };
   return (
     <>
     <div>
         <Header />
-        <div className="flex ">
+        <div className="flex">
           <div className="  ">
             <Sidebar />
           </div>
@@ -197,7 +209,7 @@ function UpdateSale() {
                     <div className="flex items-center gap-3 pt-4"></div>
                     <div className="flex gap-5 pt-4">
                       <button
-                        onClick={() => navigate("/listsale")}
+                        onClick={() => {apiData()}}
                         type="submit"
                         className="text-white border border-indigo-700 bg-indigo-700 px-6 py-3 rounded font-medium hover:bg-indigo-600"
                       >
@@ -229,7 +241,7 @@ function UpdateSale() {
           </div>
         </div>
       </div>
-      
+      <Notification show={showNotification} setShow={setShowNotification} value={'Updated Successfully!'} msg={''}/>
     </>
   );
 }

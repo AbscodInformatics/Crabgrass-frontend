@@ -1,6 +1,6 @@
-import Routing from "./Routing";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import Graph from "../components/Graph";
 function Home() {
   return (
     <>
@@ -11,7 +11,7 @@ function Home() {
             <Sidebar />
           </div>
           <div className="w-5/6  body-scroll">
-            This is home page
+            {/* <Graph/> */}
           </div>
         </div>
       </div>

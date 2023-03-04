@@ -20,7 +20,6 @@ import PrintSlip from "../components/PrintSlip";
 import UpdateProduct from "../components/UpdateProduct";
 import UpdateSale from "../components/UpdateSale";
 import Home from "./Home";
-import Dashboard from "./DashBoard";
 import PrivateRoutes from "./PrivateRoutes";
 
 const Routing = () => {
@@ -30,7 +29,6 @@ const Routing = () => {
       <Route path="*" element={<Error404 />} />
       <Route element={<PrivateRoutes />}>
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/listproducts" element={<ListProducts />} />
         <Route path="/addproduct" element={<AddProducts />} />
         <Route path="/listsale" element={<ListSale />} />

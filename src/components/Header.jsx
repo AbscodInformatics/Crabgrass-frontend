@@ -50,9 +50,9 @@ export default function Header() {
                 <button className="absolute right-72 mt-3 px-8 py-2 border-2 flex justify-center items-center rounded bg-indigo-500 " onClick={()=>navigate('/pos')}>POS</button>
                 <div className=" hidden sm:flex justify-end flex-row lg:pr-0 sm:pr-6 py-2 pr-2 pl-8 ">
                 
-                  <div className=" flex justify-center items-center flex-row pb-7 pr-0 right-6 absolute pt-2">
+                  <div onClick={() => setRotate(!rotate)} className=" cursor-pointer flex justify-center items-center flex-row pb-7 pr-0 right-6 absolute pt-2">
                     <FaUserCircle size={25} />
-                    <div className="ml-2">
+                    <div className="ml-2" >
                       <p className="text-lg leading-4 font-semibold text-white">
                         {auth.name}
                       </p>
@@ -61,7 +61,7 @@ export default function Header() {
                       </p>
                     </div>
                     <svg
-                      onClick={() => setRotate(!rotate)}
+                      
                       className={`${
                         rotate ? "rotate-180" : ""
                       } cursor-pointer transform duration-100 xl:ml-7 lg:ml-3.5 ml-2 text-white focus:outline-none focus:ring focus:ring-offset-2 focus:ring-white`}
@@ -80,7 +80,7 @@ export default function Header() {
                       />
                     </svg>
                     {
-                        rotate ? <div className="absolute z-10 top-14 w-36  h-40 rounded  bg-black text-white flex flex-col justify-evenly  ">
+                        rotate ? <div className="absolute z-10 top-14 w-36  h-40 rounded  bg-black text-white flex flex-col justify-evenly   ">
                         <div className="cursor-pointer p-2  flex items-center "> <FaUserCircle/> <b className="pl-3 text-red-500">Hi,{auth.name}</b></div>
                         <div className="cursor-pointer p-2 flex  items-center "> <ImProfile/><span className="pl-3">Profile</span></div>
                         <div onClick={()=>logout()} className="cursor-pointer p-2 flex items-center px-2"> <AiOutlineLogout/><span className="pl-3">Logout</span></div>

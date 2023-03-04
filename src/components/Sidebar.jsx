@@ -17,8 +17,8 @@ export default function Sidebar() {
           <div className="overflow-y-auto">
             <ul className="rounded  mt-8 pb-6">
               <li className="focus:bg-blue-300  rounded flex w-full justify-between text-white leading-none cursor-pointer items-center py-3 px-4 hover:bg-blue-400 ">
-                <a
-                  href=""
+                <NavLink
+                  to='/'
                   className="flex items-center rounded focus:outline-none   "
                 >
                   <svg
@@ -51,7 +51,7 @@ export default function Sidebar() {
                     />
                   </svg>
                   <span className="text-sm ml-2 ">Dashboard</span>
-                </a>
+                </NavLink>
               </li>
               <li className="flex flex-col mt-2 w-full   text-white  cursor-pointer px-4 py-2 active:bg-blue-700 hover:bg-blue-400 ">
                 <div

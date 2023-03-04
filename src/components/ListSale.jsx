@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Confirmation from './alerts/Confirmation'
+import Notification from "./alerts/Notificaion";
+
 function ListSale() {
   const navigate=useNavigate();
   const [apiData,setApiData]=useState([]);
   const [data, setData] = useState([]);
   const [search,setSearch]=useState('');
+  const [confirmShow,setConfirmShow]=useState(false);
+  const [showNotification,setShowNotification]=useState(false);
+
 
   useEffect(() => {
     
@@ -25,15 +30,28 @@ function ListSale() {
     setApiData(result)
     setData(result);
   };
+  
+  const idDeleteRef=useRef()
 
-  const deleteHandler=async(id)=>{
-    let result=await fetch(`http://localhost:4000/sale/${id}`,{
+  const deleteHandler=(id)=>{
+    idDeleteRef.current=id;
+    setConfirmShow(true);
+  }
+
+  const confirmDelete=async(choose)=>{
+    if(choose){
+      setConfirmShow(false)
+      let result=await fetch(`http://localhost:4000/sale/${idDeleteRef.current}`,{
       method:'Delete'
     })
     // result=await result.json();
     if(result.status===200){
-      alert("Data Deleted")
+      setShowNotification(true)
       getData();
+    }
+    }
+    else{
+      setConfirmShow(false)
     }
   }
 
@@ -176,7 +194,10 @@ function ListSale() {
           </div>
         </div>
       </div>
-       <Confirmation/>
+      {
+        confirmShow ? <Confirmation onDialog={confirmDelete}/> :null
+      }
+      <Notification show={showNotification} setShow={setShowNotification} value={'Deleted Successfully!'} msg={'Data deleted Successfully from Sales.'}/>
     </>
   );
 }
