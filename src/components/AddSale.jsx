@@ -1,6 +1,8 @@
 import { useFormik } from "formik";
 import React from "react";
 import { saleSchema } from "../Schemas";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
 function AddSale() {
   const { errors, values, touched, handleChange, handleBlur, handleSubmit } =
@@ -33,7 +35,14 @@ function AddSale() {
   };
   return (
     <>
-      <div className="py-12 px-4">
+    <div>
+        <Header />
+        <div className="flex ">
+          <div className="  ">
+            <Sidebar />
+          </div>
+          <div className="w-5/6  body-scroll">
+          <div className="py-12 px-4">
         <form action="" onSubmit={handleSubmit}>
           <div className="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto">
             <div className="lg:max-w-[1124px] md:max-w-[696px] max-w-[343px] mx-auto bg-white px-6 py-4 rounded shadow">
@@ -194,6 +203,10 @@ function AddSale() {
           </div>
         </form>
       </div>
+          </div>
+        </div>
+      </div>
+      
     </>
   );
 }

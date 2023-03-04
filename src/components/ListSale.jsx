@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import Confirmation from './alerts/Confirmation'
 function ListSale() {
   const navigate=useNavigate();
   const [apiData,setApiData]=useState([]);
@@ -36,7 +39,14 @@ function ListSale() {
 
   return (
     <>
-      <div className="sm:px-6 w-full">
+    <div>
+        <Header />
+        <div className="flex ">
+          <div className="  ">
+            <Sidebar />
+          </div>
+          <div className="w-5/6  body-scroll">
+          <div className="sm:px-6 w-full">
         <div className="px-4 md:px-10 py-4 md:py-7">
           <div className="lg:flex items-center justify-between">
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
@@ -163,6 +173,10 @@ function ListSale() {
           </table>
         </div>
       </div>
+          </div>
+        </div>
+      </div>
+       <Confirmation/>
     </>
   );
 }

@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { FcPrint } from "react-icons/fc";
 import Barcode from "react-barcode";
 import { useReactToPrint } from "react-to-print";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 const PrintBarCode = () => {
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -58,7 +60,14 @@ const PrintBarCode = () => {
   };
 
   return (
-    <div className="h-screen ">
+    <div>
+        <Header/>
+        <div className="flex ">
+          <div className="  ">
+            <Sidebar/>
+          </div>
+          <div className="w-5/6  body-scroll">
+            <div className="h-screen ">
  
       <div className="border-2   text-blue-900 text-lg font-bold flex justify-between">
         <h2 className="p-3">Print Barcode/Label</h2>
@@ -210,17 +219,19 @@ const PrintBarCode = () => {
               <FcPrint size={28}  /> Print
             </button>
           </div>
-          <div className="grid grid-cols-3 mt-1 " ref={componentRef} style={{width:'384.96px'}}>
+          <div className="flex flex-col m-1 " ref={componentRef} style={{width:'384.96px'}}>
             {cart.map((item) => {
               {/* console.log(typeof(item._id)) */}
               {/* let dummy=item._id.slice(15,-1) */}
 
               return (
-                <p className="  flex  pl-1 mr-1 bg-white"  style={{height:'86.4px',width:'120px'}}>
+                <p className="  flex  pl-1  bg-white border-2"  style={{height:'188px',width:'188px'}}>
                    <div className="flex flex-col items-center" >
-                   <span className="pb-0 mb-0 pr-1 text-sm">Crabgrass</span>
+                   <span className="pb-0 mb-0 pl-4 text-xl ">Crabgrass</span>
+                   <span>Price:{item.price}</span>
+                   <span>Size:{item.size}</span>
                    {/* <span className="p-0 mt-0 text-sm">Price: {item.price}</span> */}
-                  <Barcode value={(item._id.slice(15))} height={35}  width={0.9} font={0.7} textMargin={1} fontSize={10}  margin={0}  displayValue={true}/>
+                  <Barcode value={(item._id.slice(12))} height={40}  width={1.1} font={1} textMargin={3} fontSize={10}  margin={0}  displayValue={true}/>
 
                    </div>
                 </p>
@@ -230,6 +241,10 @@ const PrintBarCode = () => {
         </div>
       )}
     </div>
+          </div>
+        </div>
+      </div>
+    
   );
 };
 

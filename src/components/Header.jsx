@@ -1,55 +1,70 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { RiBillLine } from "react-icons/ri";
+import React, { useContext, useState } from "react";
+import { FaUserCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import {AiOutlineLogout} from 'react-icons/ai'
+import {ImProfile} from 'react-icons/im'
+import Notification from './alerts/Notificaion'
+import productContext from '../Context/appContext'
+
 
 export default function Header() {
+    const navigate=useNavigate()
+  const { showLog, setShowLog } = useContext(productContext);
+
   const [rotate, setRotate] = useState(false);
-  const data = JSON.parse(localStorage.getItem("signin"));
-  // console.log("header data",data.name)
+  const [show, setShow] = useState(false);
+  const auth = JSON.parse(localStorage.getItem("signin"));
+  const logout=()=>{
+    localStorage.clear('signin')
+    navigate('/login')
+  }
+
   return (
-    <div className=" w-full z-10 ">
+
+    <div className=" bg-black text-white">
       <div className=" h-full relative">
         <div className="bg-black text-white">
-          <div className="1xl:container 2xl:mx-auto">
-            <nav className="text-white">
-              <div className=" flex flex-row h-12 justify-between">
-                <div className=" flex space-x-2 items-center py-2 lg:pl-7 sm:pl-6  pl-4 pr-8 text-white">
+          <div className="2xl:container 2xl:mx-auto">
+            <nav className="h-16">
+
+              <div className=" flex flex-row justify-between">
+                <div className=" flex space-x-3 items-center  lg:pl-7 sm:pl-6 py-6 pl-1 pr-4">
                   <img
                     src="./Images/crabgrass.png"
                     alt="logo"
-                    className="w-20 "
+                    className="w-24 pr-4 left-6 top-2 absolute "
                   />
                 </div>
+
                 {/* For large (i.e. desktop and laptop sized screen) */}
-                <div className="flex  item-center  absolute right-60 m-2 pl-2 p-1 w-20 bg-blue-400 rounded hover:bg-blue-300">
-                  <NavLink
-                    to="/pos"
-                    className="flex  item-center justify-center  text-white  rounded "
-                  >
-                    <RiBillLine size={20} className="ml-1" />
-                    POS
-                  </NavLink>
+                <div className="lg:flex hidden flex-auto justify-between flex-row px-32   py-2">
+                  <div className="pl-20">
+                    <p className=" font-normal text-xs leading-3 text-white pt-1">
+                      {auth.name},
+                    </p>
+                    <h3 className=" font-bold text-l leading-4 text-white mt-2">
+                      Welcome Back
+                    </h3>
+                  </div>
                 </div>
-                <div className=" hidden sm:flex justify-end flex-row lg:pr-7 sm:pr-6 py-6 pr-4 pl-8">
-                  <div className=" flex justify-center items-center flex-row text-white">
-                    <img
-                      className="w-10 h-10 "
-                      src="https://i.ibb.co/QMddNDb/Ellipse-14.png"
-                      alt="individual person "
-                    />
+                <button className="absolute right-72 mt-3 px-8 py-2 border-2 flex justify-center items-center rounded bg-indigo-500 " onClick={()=>navigate('/pos')}>POS</button>
+                <div className=" hidden sm:flex justify-end flex-row lg:pr-0 sm:pr-6 py-2 pr-2 pl-8 ">
+                
+                  <div className=" flex justify-center items-center flex-row pb-7 pr-0 right-6 absolute pt-2">
+                    <FaUserCircle size={25} />
                     <div className="ml-2">
-                      <p className="text-lg leading-4 font-semibold ">
-                        {data.name}
+                      <p className="text-lg leading-4 font-semibold text-white">
+                        {auth.name}
                       </p>
-                      <p className=" font-normal text-xs leading-3  mt-1">
-                        {data.email}
+                      <p className=" font-normal text-xs leading-3 text-white mt-1">
+                        {auth.email}
                       </p>
                     </div>
                     <svg
                       onClick={() => setRotate(!rotate)}
                       className={`${
                         rotate ? "rotate-180" : ""
-                      } cursor-pointer transform duration-100 xl:ml-7 lg:ml-3.5 ml-2 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-gray-800`}
+                      } cursor-pointer transform duration-100 xl:ml-7 lg:ml-3.5 ml-2 text-white focus:outline-none focus:ring focus:ring-offset-2 focus:ring-white`}
                       width={14}
                       height={8}
                       viewBox="0 0 14 8"
@@ -58,20 +73,30 @@ export default function Header() {
                     >
                       <path
                         d="M1 1L7 7L13 1"
-                        stroke="#FFFFFF"
+                        stroke="#ffffff"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
                     </svg>
+                    {
+                        rotate ? <div className="absolute z-10 top-14 w-36  h-40 rounded  bg-black text-white flex flex-col justify-evenly  ">
+                        <div className="cursor-pointer p-2  flex items-center "> <FaUserCircle/> <b className="pl-3 text-red-500">Hi,{auth.name}</b></div>
+                        <div className="cursor-pointer p-2 flex  items-center "> <ImProfile/><span className="pl-3">Profile</span></div>
+                        <div onClick={()=>logout()} className="cursor-pointer p-2 flex items-center px-2"> <AiOutlineLogout/><span className="pl-3">Logout</span></div>
+                        </div> :null
+                    }
                   </div>
+
                 </div>
                 {/* Burger Icon */}
                 <div
                   id="bgIcon"
+                  onClick={() => setShow(!show)}
                   className=" focus:outline-none focus:ring focus:ring-offset-2 focus:ring-gray-800 block sm:hidden cursor-pointer lg:pr-7 sm:pr-6 py-6 pr-4"
                 >
                   <svg
+                    className={`${show ? "hidden" : ""}`}
                     width={24}
                     height={24}
                     viewBox="0 0 24 24"
@@ -103,6 +128,7 @@ export default function Header() {
                     />
                   </svg>
                   <svg
+                    className={`${show ? "" : "hidden"} `}
                     width={24}
                     height={24}
                     viewBox="0 0 24 24"
@@ -127,7 +153,7 @@ export default function Header() {
                 </div>
               </div>
               {/* for medium-sized devices */}
-              {/* <div className="lg:hidden hidden sm:flex flex-col lg:px-7 sm:px-6 px-4 ">
+              <div className="lg:hidden hidden sm:flex flex-col lg:px-7 sm:px-6 px-4 ">
                 <hr className=" w-full bg-gray-200 " />
                 <div className="lg:hidden flex flex-auto justify-between mt-3 flex-row pb-4">
                   <div className>
@@ -167,14 +193,16 @@ export default function Header() {
                     />
                   </div>
                 </div>
-              </div> */}
+              </div>
             </nav>
           </div>
         </div>
         {/* Mobile and Small devices Navigation */}
-        {/* <div
+        <div
           id="MobileNavigation"
-        
+          className={`${
+            show ? "" : "hidden"
+          } transform duration-150 sm:hidden h-full bg-white `}
         >
           <div className=" flex flex-col justify-between h-auto ">
             <div className=" flex flex-col lg:px-7 sm:px-6 px-4">
@@ -248,14 +276,14 @@ export default function Header() {
               <img
                 className="w-10 h-10 "
                 src="https://i.ibb.co/QMddNDb/Ellipse-14.png"
-                alt="individual person "
+                alt="individual person image-3"
               />
               <div className="ml-2">
                 <p className="text-lg leading-4 font-semibold text-gray-800">
-                  {data.name}
+                  David Hulk
                 </p>
                 <p className=" font-normal text-xs leading-3 text-gray-600 mt-1">
-                  {data.email}
+                  david@alphahulk.com
                 </p>
               </div>
               <svg
@@ -277,8 +305,9 @@ export default function Header() {
               </svg>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
+      <Notification show={showLog} setShow={setShowLog} value={`Hi, ${auth.name} Login Successfully!`} msg={'Welcome to our Crabgrass dashboard now you can use our Services. Thank you!'}/>
     </div>
   );
 }

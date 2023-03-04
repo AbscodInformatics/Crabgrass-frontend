@@ -1,6 +1,8 @@
 import { useFormik } from "formik";
 import React from "react";
 import { userSchema } from "../Schemas";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
 function AddUser() {
   const { errors, values, touched, handleBlur, handleChange, handleSubmit } =
@@ -33,7 +35,14 @@ function AddUser() {
 
   return (
     <>
-      <div className="py-12 px-4">
+    <div>
+        <Header />
+        <div className="flex ">
+          <div className="  ">
+            <Sidebar />
+          </div>
+          <div className="w-5/6  body-scroll">
+          <div className="py-12 px-4">
         <div className="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto">
           <form action="" onSubmit={handleSubmit}>
             <div className="lg:max-w-[1124px] md:max-w-[696px] max-w-[343px] mx-auto bg-white px-6 py-4 rounded shadow">
@@ -192,6 +201,10 @@ function AddUser() {
           </form>
         </div>
       </div>
+          </div>
+        </div>
+      </div>
+      
     </>
   );
 }

@@ -1,8 +1,17 @@
 import React from "react";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
 function ListReturn() {
   return (
-    <div className="mx-8 lg:w-11/12 w-full overflow-x-auto">
+    <div>
+        <Header />
+        <div className="flex ">
+          <div className="  ">
+            <Sidebar />
+          </div>
+          <div className="w-5/6  body-scroll">
+          <div className="mx-8 lg:w-11/12 w-full overflow-x-auto">
       <table className="w-full whitespace-nowrap border-gray-100 border rounded-lg">
         <thead className="bg-gray-100">
           <tr className>
@@ -68,6 +77,10 @@ function ListReturn() {
         </tbody>
       </table>
     </div>
+          </div>
+        </div>
+      </div>
+    
   );
 }
 

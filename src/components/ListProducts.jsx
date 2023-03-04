@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Notification from '../components/alerts/Notificaion'
+import Confirmation from "./alerts/Confirmation";
+import Header from './Header'
+import Sidebar from './Sidebar'
 
 function ListProducts() {
   const navigate = useNavigate();
   const [apiData, setApiData] = useState([]);
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
+  const [show,setShow]=useState(false)
+  const [confirm,setConfirm]=useState(false)
 
   useEffect(() => {
     getData();
@@ -18,17 +24,29 @@ function ListProducts() {
     setData(result);
   };
   // console.log("result", data);
-
-  const deleteHandler = async (id) => {
-    let result = await fetch(`https://crabgrassbackend.onrender.com/product/${id}`, {
-      method: "DELETE",
-    });
-    if (result.status === 200) {
-      alert("Item Deleted");
-      getData();
-    }
+  const idDeleteRef=useRef()
+  const deleteHandler =  (id) => {
+    setConfirm(true);
+     idDeleteRef.current=id
     // console.log("result",result.status==200)
   };
+  const deleteConfiration=async(choose)=>{
+    if(choose){
+      setConfirm(false)
+      let result = await fetch(`https://crabgrassbackend.onrender.com/product/${idDeleteRef.current}`, {
+        method: "DELETE",
+      });
+      if (result.status === 200) {
+        setShow(true)
+        getData();
+      }
+
+    }
+    else{
+      setConfirm(false)
+    }
+  
+  }
 
   const searchHandler = (value) => {
     setSearch(value.toLowerCase());
@@ -42,7 +60,15 @@ function ListProducts() {
   }, [search]);
 
   return (
-    <div className="sm:px-6 w-full">
+    <div>
+        <Header />
+        <div className="flex ">
+          <div className="  ">
+            <Sidebar />
+          </div>
+          <div className="w-5/6  body-scroll">
+      
+            <div className="sm:px-6 w-full">
       <div className="px-4 md:px-10 py-4 md:py-7">
         <div className="lg:flex items-center justify-between">
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
@@ -180,7 +206,15 @@ function ListProducts() {
           </tbody>
         </table>
       </div>
+      {
+      confirm ?  <Confirmation onDialog={deleteConfiration}/> :null
+      }
+      <Notification value={'Deleted  Sucessfully'}  msg={'Delete '} show={show} setShow={setShow}/>
     </div>
+          </div>
+        </div>
+      </div>
+    
   );
 }
 

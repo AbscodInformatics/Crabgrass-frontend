@@ -1,9 +1,7 @@
-import React from "react";
-import Sidebar from "../components/Sidebar";
-import Header from "../components/Header";
 import Routing from "./Routing";
-
-const DashBoard = () => {
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
+function Home() {
   return (
     <>
       <div>
@@ -13,13 +11,11 @@ const DashBoard = () => {
             <Sidebar />
           </div>
           <div className="w-5/6  body-scroll">
-            {/* <Routing /> */}
-            Dash board Page
+            This is home page
           </div>
         </div>
       </div>
     </>
   );
-};
-
-export default DashBoard;
+}
+export default Home;

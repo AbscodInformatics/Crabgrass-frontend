@@ -3,16 +3,21 @@ import React, { useEffect, useState } from "react";
 import { productSchema } from "../Schemas";
 import {useParams} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import Notification from './alerts/Notificaion'
+
 function UpdateProduct() {
     const navigate=useNavigate();
     const [data,setData]=useState();
+    const [show,setShow]=useState(false)
     const params=useParams();
     useEffect(()=>{
         // console.log(params)
        getProductDetails()
     },[])
     const getProductDetails=async()=>{
-     let result=await fetch(`https://crabgrassbackend.onrender.com/${params.id}`)
+     let result=await fetch(`https://crabgrassbackend.onrender.com/product/${params.id}`)
      result=await result.json();
      setData(result)
     
@@ -41,14 +46,20 @@ function UpdateProduct() {
       },
       validationSchema: productSchema,
       onSubmit: (values, action) => {
+        
         apiData(values);
-        navigate('/listproducts')
+        setShow(true)
+        setTimeout(()=>{
+          setShow(false)
+          navigate('/listproducts')
+        },1000)
       },
-      
     });
 
   const apiData = async (data) => {
-    let result = await fetch(`https://crabgrassbackend.onrender.com/${params.id}`, {
+    let result = await fetch(`https://crabgrassbackend.onrender.com/product/${params.id}`, {
+
+      
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
@@ -61,7 +72,14 @@ function UpdateProduct() {
 
   return (
     <>
-      <div className="py-12 px-4">
+    <div>
+        <Header />
+        <div className="flex ">
+          <div className="  ">
+            <Sidebar />
+          </div>
+          <div className="w-5/6  body-scroll">
+          <div className="py-12 px-4">
         <div className="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto">
           <form action="" onSubmit={handleSubmit}>
             <div className="lg:max-w-[1124px] md:max-w-[696px] max-w-[343px] mx-auto bg-white px-6 py-4 rounded shadow">
@@ -263,6 +281,10 @@ function UpdateProduct() {
           </form>
         </div>
       </div>
+          </div>
+        </div>
+      </div>
+      <Notification value={'Update Successfully'} msg={'update '} show={show} setShow={setShow}/>
     </>
   );
 }

@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { useContext } from "react";
+import productContext from "../Context/appContext";
 
 function SignIn() {
+  const { showLog, setShowLog } = useContext(productContext);
+
   const navigate = useNavigate();
   const [signInDetail, setSignInDetail] = useState({});
   const [err, setErr] = useState(false);
@@ -25,22 +29,34 @@ function SignIn() {
   };
   // console.log(signInDetail)
 
-  const submitHandler = async () => {
-    let result = await fetch("https://crabgrassbackend.onrender.com/signin", {
+  const submitHandler = () => {
+    fetch("https://crabgrassbackend.onrender.com/signin", {
+  //  fetch("http://localhost:4000/signin", {
       method: "post",
       body: JSON.stringify(signInDetail),
       headers: {
         "content-type": "application/json",
       },
-    });
-    result = await result.json();
-    if (result.email === signInDetail.email) {
-      localStorage.setItem("signin", JSON.stringify(result));
-      navigate("/pos");
-      window.location.reload(true);
-    } else {
-      setErr(true);
-    }
+    })
+      .then((resp) => resp.json())
+      .then((res) => {
+        if(res.sucess){
+        localStorage.setItem("signin", JSON.stringify(res.data));
+        navigate("/")
+        setShowLog(true)
+        }else{
+          setErr(true);
+        }
+
+      });
+
+    // if (result.email === signInDetail.email) {
+    //   localStorage.setItem("signin", JSON.stringify(result,true));
+    //   setShowLogin(true);
+    //   navigate("/home");
+    // } else {
+    //   setErr(true);
+    // }
   };
 
   return (
@@ -112,7 +128,6 @@ function SignIn() {
                   setValue(!value);
                 }}
               >
-                
                 {value ? <AiFillEye /> : <AiFillEyeInvisible />}
               </div>
             </div>
@@ -128,7 +143,7 @@ function SignIn() {
           </div>
           {err ? (
             <p className="text-red-600 font-bold p-1">
-              User name Or Paswword not match
+              User name Or Pasword not match
             </p>
           ) : null}
         </div>
