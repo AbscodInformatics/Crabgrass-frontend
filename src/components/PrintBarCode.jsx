@@ -240,7 +240,7 @@ const PrintBarCode = () => {
 
                     return (
                       <div
-                        className="    flex justify-center item-center my-2  bg-white "
+                        className="    flex justify-center item-center my-6  bg-white "
                         style={{ height: "188px", width: "188px" }}
                       >
                         <div className="  flex flex-col items-center pt-6">
