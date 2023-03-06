@@ -1,12 +1,17 @@
 import * as Yup from "yup";
 
 export const returnSchema = Yup.object({
-  date: Yup.date().required("enter Date"),
-  reference_no: Yup.string().min(2).max(12).required("Enter Reference no."),
-  biller: Yup.string().min(3).max(20).required("Enter biller Name"),
-  customer_name: Yup.string().min(3).max(20).required("Enter Customer name"),
-  total: Yup.number().required("Enter total Amount"),
-  payment_status: Yup.string().min(3).max(20).required("Enter Payment status"),
+  date: Yup.date().required("Enter Date"),
+  product_name: Yup.string().min(3).max(20).required("Enter Product name"),
+  customer_name:Yup.string(),
+  product_category: Yup.string()
+    .min(3)
+    .max(20)
+    .required("Enter Product Category"),
+  sub_category: Yup.string().min(3).max(20).required("Enter Sub Category"),
+  price: Yup.number().required("Enter Price"),
+  quantity: Yup.number().positive().required("Enter Quantity"),
+  size: Yup.string().min(1).max(20).required("Enter Size"),
 });
 
 export const productSchema = Yup.object({
@@ -68,7 +73,7 @@ export const userSchema = Yup.object({
     .required("Enter Password"),
    
 
-  confirm_password: Yup.string()
+  new_password: Yup.string()
     .required()
     .oneOf([Yup.ref("password"), null], "password must match"),
 });

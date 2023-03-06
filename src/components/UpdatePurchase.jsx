@@ -1,50 +1,77 @@
 import { useFormik } from "formik";
-import React, { useState } from "react";
-import { productSchema } from "../Schemas";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { productSchema, purchaseSchema } from "../Schemas";
 import Notification from "./alerts/Notificaion";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
-function AddProducts() {
-  const [showAlert,setShowAlert]=useState(false)
-  setTimeout(()=>{
-   setShowAlert(false)
-  },3000)
+function UpdatePurchase() {
+  const navigate = useNavigate();
+  const params = useParams();
+  const [showNotification, setShowNotification] = useState(false);
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    apiData();
+  }, []);
+
+  const updateApi = async (data) => {
+    let result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/purchase/${params.id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    result = await result.json();
+    console.log("result", result);
+    if (result.status) {
+      navigate("/listpurchase");
+    }
+  };
+
   const { errors, values, handleSubmit, handleChange, handleBlur, touched } =
     useFormik({
       initialValues: {
         date: "",
+        company: "",
+        tax_id: "",
         product_name: "",
         product_category: "",
         sub_category: "",
+        payment_status: "",
         price: "",
         quantity: "",
         size: "",
       },
-      validationSchema: productSchema,
+      validationSchema: purchaseSchema,
       onSubmit: (values, action) => {
-        apiData(values);
+        updateApi(values);
+        setShowNotification(true);
         action.resetForm();
-       
-        setShowAlert(true)
-
       },
     });
 
-  const apiData = async (data) => {
-    let result = await fetch(
-      `${process.env.REACT_APP_API_BASE_URL}/add-product`,
-      {
-        method: "post",
-        body: JSON.stringify(data),
-        headers: {
-          "content-type": "application/json",
-        },
-      }
-    );
+  const apiData = async () => {
+    let result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/purchase/${params.id}`);
     result = await result.json();
-    console.log("result", result);
+    setData(result);
+    if (result) {
+      console.log(result);
+      values.date = result.date;
+      values.company = result.company;
+      values.tax_id = result.tax_id;
+      values.product_name = result.product_name;
+      values.product_category = result.product_category;
+      values.sub_category = result.sub_category;
+      values.payment_status = result.payment_status;
+      values.price = result.price;
+      values.quantity = result.quantity;
+      values.size = result.size;
+    }
   };
+ 
 
   return (
     <>
@@ -61,7 +88,7 @@ function AddProducts() {
                   <div className="lg:max-w-[1124px] md:max-w-[696px] max-w-[343px] mx-auto bg-white px-6 py-4 rounded shadow">
                     <div>
                       <p className="text-xl font-semibold leading-tight text-gray-800 text-center">
-                        Add Product
+                        Update Purchase
                       </p>
                     </div>
 
@@ -81,7 +108,7 @@ function AddProducts() {
                           onBlur={handleBlur}
                           onChange={handleChange}
                           value={values.date}
-                          placeholder="Enter Product name"
+                          placeholder="Enter Date"
                           className="focus:outline-none border border-gray-300 py-3 pl-3 rounded w-full mt-4"
                         />
                         {errors.date && touched.date ? (
@@ -89,6 +116,25 @@ function AddProducts() {
                         ) : null}
                       </div>
 
+                      <div className="w-full">
+                        <p className="text-base leading-none text-gray-800">
+                          Company Name
+                        </p>
+                        <input
+                          type="text"
+                          name="company"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.company}
+                          placeholder="Enter Company name"
+                          className="focus:outline-none border border-gray-300 py-3 pl-3 rounded w-full mt-4"
+                        />
+                        {errors.company && touched.company ? (
+                          <p style={{ color: "red" }}>{errors.company}</p>
+                        ) : null}
+                      </div>
+                    </div>
+                    <div className="lg:flex md:block block justify-center gap-4 pt-6">
                       <div className="w-full">
                         <p className="text-base leading-none text-gray-800">
                           Product Name
@@ -99,11 +145,31 @@ function AddProducts() {
                           onBlur={handleBlur}
                           onChange={handleChange}
                           value={values.product_name}
-                          placeholder="Enter Product name"
+                          placeholder="Enter Product Name"
                           className="focus:outline-none border border-gray-300 py-3 pl-3 rounded w-full mt-4"
                         />
                         {errors.product_name && touched.product_name ? (
                           <p style={{ color: "red" }}>{errors.product_name}</p>
+                        ) : null}
+                      </div>
+
+                      <div className="w-full">
+                        <p className="text-base leading-none text-gray-800">
+                          Product Category
+                        </p>
+                        <input
+                          type="text"
+                          name="product_category"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.product_category}
+                          placeholder="Enter Product Category"
+                          className="focus:outline-none border border-gray-300 py-3 pl-3 rounded w-full mt-4"
+                        />
+                        {errors.product_category && touched.product_category ? (
+                          <p style={{ color: "red" }}>
+                            {errors.product_category}
+                          </p>
                         ) : null}
                       </div>
                     </div>
@@ -112,17 +178,61 @@ function AddProducts() {
                       <div className="lg:flex md:block block justify-between gap-4">
                         <div className="w-full">
                           <p className="text-base leading-none text-gray-800">
-                            Product Category
+                            Enter Sub Category
                           </p>
                           <input
                             type="text"
-                            name="product_category"
+                            name="sub_category"
                             onBlur={handleBlur}
                             onChange={handleChange}
-                            value={values.product_category}
-                            placeholder="Enter your Product category"
+                            value={values.sub_category}
+                            placeholder="Enter  Product sub category"
                             className="focus:outline-none border border-gray-300 py-3 pl-3 rounded w-full mt-4"
                           />
+                          {errors.sub_category && touched.sub_category ? (
+                            <p style={{ color: "red" }}>
+                              {errors.sub_category}
+                            </p>
+                          ) : null}
+                        </div>
+                        <div className="w-full">
+                          <p className="text-base leading-none text-gray-800 lg:pt-0 md:pt-3 pt-3">
+                            Price
+                          </p>
+                          <input
+                            type="text"
+                            name="price"
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            value={values.price}
+                            placeholder="Enter Price"
+                            className="focus:outline-none border border-gray-300 py-3 pl-3 rounded mt-4 w-full"
+                          />
+                          {errors.price && touched.price ? (
+                            <p style={{ color: "red" }}>{errors.price}</p>
+                          ) : null}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="pt-6">
+                      <div className="lg:flex md:block block justify-between gap-4">
+                        <div className="w-full">
+                          <p className="text-base leading-none text-gray-800">
+                            Payment Status
+                          </p>
+
+                          <select
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            name="payment_status"
+                            className=" text-sm leading-3 text-gray-500  focus:outline-none border border-gray-300 py-3 pl-3 rounded w-full mt-4"
+                          >
+                            <option value="N/A" defaultChecked>
+                              N/A
+                            </option>
+                            <option value="Pending">Pending</option>
+                            <option value="Success">Success</option>
+                          </select>
                           {errors.product_category &&
                           touched.product_category ? (
                             <p style={{ color: "red" }}>
@@ -132,47 +242,7 @@ function AddProducts() {
                         </div>
                         <div className="w-full">
                           <p className="text-base leading-none text-gray-800 lg:pt-0 md:pt-3 pt-3">
-                            Product Sub-Category
-                          </p>
-                          <input
-                            type="text"
-                            name="sub_category"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.sub_category}
-                            placeholder="Enter product code"
-                            className="focus:outline-none border border-gray-300 py-3 pl-3 rounded mt-4 w-full"
-                          />
-                          {errors.sub_category && touched.sub_category ? (
-                            <p style={{ color: "red" }}>
-                              {errors.sub_category}
-                            </p>
-                          ) : null}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="pt-6">
-                      <div className="lg:flex md:block block justify-between gap-4">
-                        <div className="w-full">
-                          <p className="text-base leading-none text-gray-800">
-                            Price
-                          </p>
-                          <input
-                            type="String"
-                            name="price"
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.price}
-                            placeholder="Enter price"
-                            className="focus:outline-none border border-gray-300 py-3 pl-3 rounded w-full mt-4"
-                          />
-                          {errors.price && touched.price ? (
-                            <p style={{ color: "red" }}>{errors.price}</p>
-                          ) : null}
-                        </div>
-                        <div className="w-full">
-                          <p className="text-base leading-none text-gray-800 lg:pt-0 md:pt-3 pt-3">
-                            Tax Id No.
+                            Enter Tax ID
                           </p>
                           <input
                             type="text"
@@ -180,7 +250,7 @@ function AddProducts() {
                             onBlur={handleBlur}
                             onChange={handleChange}
                             value={values.tax_id}
-                            placeholder="Enter Tax Id No."
+                            placeholder="Enter Tax ID."
                             className="focus:outline-none border border-gray-300 py-3 pl-3 rounded mt-4 w-full"
                           />
                           {errors.tax_id && touched.tax_id ? (
@@ -194,9 +264,9 @@ function AddProducts() {
                         <p className="text-base leading-none text-gray-800 pt-3">
                           Quantity
                         </p>
-                        <div className="border border-gray-300 focus:bg-gray-50 rounded w-half px-4 py-3 mt-4">
+                        <div className="border border-gray-300 focus:bg-gray-50 rounded  w-half px-4 py-3 mt-4">
                           <input
-                            className="leading-none text-gray-600 focus:outline-none"
+                            className="leading-none text-gray-600 focus:outline-none h-full w-full"
                             type="number"
                             placeholder="Enter Quantity"
                             name="quantity"
@@ -204,10 +274,10 @@ function AddProducts() {
                             onChange={handleChange}
                             value={values.quantity}
                           />
-                          {errors.quantity && touched.quantity ? (
-                            <p style={{ color: "red" }}>{errors.quantity}</p>
-                          ) : null}
                         </div>
+                        {errors.quantity && touched.quantity ? (
+                          <p style={{ color: "red" }}>{errors.quantity}</p>
+                        ) : null}
                       </div>
                       <div className="w-full">
                         <p className="text-base leading-none text-gray-800 pt-3">
@@ -215,7 +285,7 @@ function AddProducts() {
                         </p>
                         <div className="border border-gray-300 focus:bg-gray-50 rounded w-half px-4 py-3 mt-4">
                           <input
-                            className="leading-none text-gray-600 focus:outline-none"
+                            className="leading-none text-gray-600 focus:outline-none w-full"
                             type="text"
                             placeholder="Enter Size"
                             name="size"
@@ -223,22 +293,22 @@ function AddProducts() {
                             onChange={handleChange}
                             value={values.size}
                           />
-                          {errors.size && touched.size ? (
-                            <p style={{ color: "red" }}>{errors.size}</p>
-                          ) : null}
                         </div>
+                        {errors.size && touched.size ? (
+                          <p style={{ color: "red" }}>{errors.size}</p>
+                        ) : null}
                       </div>
                     </div>
                     <div>
                       <div className="lg:block md:hidden hidden">
                         <div className="flex justify-between items-center">
                           <div className="flex items-center gap-3 pt-4"></div>
-                          <div className="flex gap-5 pt-4 bg-indigo-600 px-6 py-3 border rounded mt-3 border-indigo-700 float-right hover:bg-indigo-500">
+                          <div className="flex gap-5 pt-4 bg-indigo-600 px-6 py-3 border mt-3 border-indigo-700 float-right">
                             <button
                               type="submit"
                               className="text-white   bg-blue-600  rounded font-medium "
                             >
-                              Add Product
+                              Update Purchase
                               <svg
                                 className=" float-right flex justify-center items-center mt-1"
                                 width={18}
@@ -265,11 +335,10 @@ function AddProducts() {
             </div>
           </div>
         </div>
-
       </div>
-      <Notification show={showAlert} setShow={setShowAlert} value={'Add Product Succesfully'} msg={''}/>
+      {<Notification show={showNotification} />}
     </>
   );
 }
 
-export default AddProducts;
+export default UpdatePurchase;

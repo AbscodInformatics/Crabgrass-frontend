@@ -21,7 +21,7 @@ function AddSalesMan() {
   })
 
   const apiData=async(data)=>{
-    let result =await fetch('https://crabgrassbackend.onrender.com/add-salesman',{
+    let result =await fetch(`${process.env.REACT_APP_API_BASE_URL}/add-salesman`,{
       method:'POST',
       body:JSON.stringify(data),
       headers:{

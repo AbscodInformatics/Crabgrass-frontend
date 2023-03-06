@@ -12,6 +12,7 @@ function Home() {
           </div>
           <div className="w-5/6  body-scroll">
             {/* <Graph/> */}
+       
           </div>
         </div>
       </div>

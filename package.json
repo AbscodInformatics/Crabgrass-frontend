@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.13",
     "chart.js": "^4.2.1",
+    "env-cmd": "^10.1.0",
     "formik": "^2.2.9",
     "next": "^13.1.6",
     "postcss": "^8.4.21",
@@ -18,13 +19,14 @@
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
     "react-to-print": "^2.14.12",
     "web-vitals": "^2.1.4",
     "yup": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "env-cmd react-scripts start",
+    "build": "env-cmd react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

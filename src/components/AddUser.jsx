@@ -13,7 +13,7 @@ function AddUser() {
         contact: "",
         address: "",
         password: "",
-        confirm_password: "",
+        new_password: "",
       },
       validationSchema: userSchema,
       onSubmit: (values, action) => {
@@ -23,7 +23,7 @@ function AddUser() {
     });
 
   const apiData = async (data) => {
-    let result = await fetch("https://crabgrassbackend.onrender.com/add-user", {
+    let result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/add-user`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -153,15 +153,15 @@ function AddUser() {
                     </p>
                     <input
                       type="password"
-                      name="confirm_password"
+                      name="new_password"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      value={values.confirm_password}
+                      value={values.new_password}
                       placeholder="Enter Confirm Password"
                       className="focus:outline-none border border-gray-300 py-3 pl-3 rounded mt-4 w-full"
                     />
-                    {errors.confirm_password && touched.confirm_password ? (
-                      <p style={{ color: "red" }}>{errors.confirm_password}</p>
+                    {errors.new_password && touched.new_password ? (
+                      <p style={{ color: "red" }}>{errors.new_password}</p>
                     ) : null}
                   </div>
                 </div>

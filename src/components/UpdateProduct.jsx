@@ -17,7 +17,7 @@ function UpdateProduct() {
        getProductDetails()
     },[])
     const getProductDetails=async()=>{
-     let result=await fetch(`https://crabgrassbackend.onrender.com/product/${params.id}`)
+     let result=await fetch(`${process.env.REACT_APP_API_BASE_URL}/product/${params.id}`)
      result=await result.json();
      setData(result)
     
@@ -57,7 +57,7 @@ function UpdateProduct() {
     });
 
   const apiData = async (data) => {
-    let result = await fetch(`https://crabgrassbackend.onrender.com/product/${params.id}`, {
+    let result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/product/${params.id}`, {
 
       
       method: "PUT",

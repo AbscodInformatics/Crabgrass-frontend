@@ -26,7 +26,7 @@ function AddSale() {
     });
 
   const apiData = async (data) => {
-    let result = await fetch("https://crabgrassbackend.onrender.com/add-sale", {
+    let result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/add-sale`, {
       method: "post",
       body: JSON.stringify(data),
       headers: {
@@ -177,27 +177,9 @@ function AddSale() {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-3 pt-4"></div>
                     <div className="flex gap-5 pt-4">
-                      <button
-                        type="submit"
-                        className="text-white border border-indigo-700 bg-indigo-700 px-6 py-3 rounded font-medium hover:bg-indigo-600"
-                      >
-                        Add Sale
-                        <svg
-                          className="mt-1 float-right flex justify-center items-center"
-                          width={18}
-                          height={18}
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M5.87213 3.34088C5.54262 3.67038 5.54262 4.20462 5.87213 4.53412L10.338 9L5.87213 13.4659C5.54262 13.7954 5.54262 14.3296 5.87213 14.6591C6.20163 14.9886 6.73587 14.9886 7.06537 14.6591L12.1279 9.59662C12.4574 9.26712 12.4574 8.73288 12.1279 8.40338L7.06537 3.34088C6.73587 3.01137 6.20163 3.01137 5.87213 3.34088Z"
-                            fill="white"
-                          />
-                        </svg>
-                      </button>
+                    <button className="bg-indigo-700 rounded hover:bg-indigo-600 transform duration-300 ease-in-out text-sm font-medium px-6 py-4 text-white lg:max-w-[144px] w-full ">
+                    Add Sale
+                  </button>
                     </div>
                   </div>
                 </div>
