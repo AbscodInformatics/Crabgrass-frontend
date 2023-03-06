@@ -4,11 +4,13 @@ import Confirmation from "./alerts/Confirmation";
 import Notification from "./alerts/Notificaion";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import Loading from './Loading'
 
 function ListPurchase() {
   const navigate = useNavigate();
-  const [showNotifiction,setShowNotification]=useState(false)
-  const [showConfirmation,setShowConfirmation]=useState(false)
+  const [showNotifiction, setShowNotification] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [Loader,setLoader]=useState(true)
 
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -18,29 +20,33 @@ function ListPurchase() {
     let result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/purchase`);
     result = await result.json();
     setData([...result]);
+    setLoader(false);
+
   };
-  const idDeleteRef=useRef();
-  const deleteHandler =  (id) => {
-    idDeleteRef.current=id
-    setShowConfirmation(true)
+  const idDeleteRef = useRef();
+  const deleteHandler = (id) => {
+    idDeleteRef.current = id;
+    setShowConfirmation(true);
   };
-  const deleteConfirmation=async(choose)=>{
-    setShowConfirmation(false)
-   if(choose){
-    setShowNotification(true)
-    let result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/purchase/${idDeleteRef.current}`,{
-      method:'DELETE'
-    });
-    result = await result.json();
-    if (result) {
-      getData()
-      console.log("success", result);
+  const deleteConfirmation = async (choose) => {
+    setShowConfirmation(false);
+    if (choose) {
+      setShowNotification(true);
+      let result = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/purchase/${idDeleteRef.current}`,
+        {
+          method: "DELETE",
+        }
+      );
+      result = await result.json();
+      if (result) {
+        getData();
+        console.log("success", result);
+      }
+    } else {
+      setShowConfirmation(false);
     }
-   }
-   else{
-  setShowConfirmation(false)
-   }
-  }
+  };
 
   return (
     <div>
@@ -49,7 +55,8 @@ function ListPurchase() {
         <div className="  ">
           <Sidebar />
         </div>
-        <div className="w-5/6  body-scroll">
+        {
+          Loader ? <Loading/> :<div className="w-5/6  body-scroll">
           <div className="sm:px-6 w-full">
             <div className="px-4 md:px-10 py-4 md:py-7">
               <div className="lg:flex items-center justify-between">
@@ -114,13 +121,13 @@ function ListPurchase() {
               <table className="w-full whitespace-nowrap">
                 <thead>
                   <tr className="h-10 w-full text-l font-500 leading-none text-black bg-blue-300">
-                    <th className="font-normal text-left pl-4">#</th>
-                    <th className="font-normal text-left pl-4">Date </th>
-                    <th className="font-normal text-left pl-4">company </th>
-                    <th className="font-normal text-left pl-11">tax ID </th>
-                    <th className="font-normal text-left pl-11">Product </th>
-                    <th className="font-normal text-left pl-2">Category</th>
-                    <th className="font-normal text-left">Sub-Category</th>
+                    <th className="font-normal text-left pl-3">#</th>
+                    <th className="font-normal text-left pl-3">Date </th>
+                    <th className="font-normal text-left pl-3">company </th>
+                    <th className="font-normal text-left pl-3">tax ID </th>
+                    <th className="font-normal text-left pl-3">Product </th>
+                    <th className="font-normal text-left pl-3">Category</th>
+                    <th className="font-normal text-left pl-4">Sub-Category</th>
                     <th className="font-normal text-left">Price</th>
                     <th className="font-normal text-left">Quantity</th>
                     <th className="font-normal text-left w-32">Size</th>
@@ -134,27 +141,27 @@ function ListPurchase() {
                         key={id}
                         className="h-10 text-sm leading-none text-gray-700 border-b border-t border-gray-200 bg-white hover:bg-gray-100"
                       >
-                        <td className="pl-4">{id + 1}</td>
-                        <td className="pl-4">
+                        <td className="pl-3">{id + 1}</td>
+                        <td className="pl-3">
                           <div className="flex items-center">{item.date}</div>
                         </td>
                         <td>
-                          <p className="mr-16 pl-10">{item.company}</p>
+                          <p className="mr-16 pl-4">{item.company}</p>
                         </td>
                         <td>
-                          <p className="mr-16 pl-10">{item.tax_id}</p>
+                          <p className="mr-16 pl-4">{item.tax_id}</p>
                         </td>
                         <td>
-                          <p className="mr-16 pl-10">{item.product_name}</p>
+                          <p className="mr-16 pl-4">{item.product_name}</p>
                         </td>
                         <td>
-                          <p className="mr-16">{item.product_category}</p>
+                          <p className="mr-8">{item.product_category}</p>
                         </td>
                         <td>
-                          <p className="mr-16">{item.sub_category}</p>
+                          <p className="mr-10">{item.sub_category}</p>
                         </td>
                         <td>
-                          <div className="w-20 h-6 flex items-center mr-16 justify-center ">
+                          <div className="w-18 h-6 flex items-center mr-16 justify-center ">
                             <p className="text-xs leading-3 ">{item.price}</p>
                           </div>
                         </td>
@@ -173,7 +180,10 @@ function ListPurchase() {
 
                         <td>
                           <div className="flex items-center">
-                            <button onClick={()=>navigate(`/Purchase/${item._id}`)} className="bg-gray-100 mr-3 hover:bg-blue-400 py-2.5 px-5 rounded text-sm leading-3 text-gray-500 focus:outline-none">
+                            <button
+                              onClick={() => navigate(`/Purchase/${item._id}`)}
+                              className="bg-gray-100 mr-3 hover:bg-blue-400 py-2.5 px-5 rounded text-sm leading-3 text-gray-500 focus:outline-none"
+                            >
                               Edit
                             </button>
                             <button
@@ -192,14 +202,11 @@ function ListPurchase() {
             </div>
           </div>
         </div>
+        }
       </div>
-      {
-        showConfirmation && <Confirmation onDialog={deleteConfirmation}/>
-      }
-      
-        <Notification show={showNotifiction}/> 
+      {showConfirmation && <Confirmation onDialog={deleteConfirmation} />}
 
-      
+      <Notification show={showNotifiction} />
     </div>
   );
 }

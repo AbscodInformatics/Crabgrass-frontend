@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import Loading from './Loading'
 
 function ListSalesMan() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [Loader,setLoader]=useState(true)
+  
 
   useEffect(() => {
     apiData();
@@ -30,6 +33,7 @@ function ListSalesMan() {
     let result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/salesman`);
     result = await result.json();
     setData(result);
+    setLoader(false)
   };
 
   return (
@@ -40,7 +44,8 @@ function ListSalesMan() {
           <div className="  ">
             <Sidebar />
           </div>
-          <div className="w-5/6  body-scroll">
+          {
+            Loader ? <Loading/> :<div className="w-5/6  body-scroll">
             <div className="sm:px-6 w-full">
               <div className="px-4 md:px-10 py-4 md:py-7">
                 <div className="lg:flex items-center justify-between">
@@ -164,6 +169,7 @@ function ListSalesMan() {
               </div>
             </div>
           </div>
+          }
         </div>
       </div>
     </>
