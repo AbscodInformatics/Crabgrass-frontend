@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Graph from "../components/Graph";
+import PrintSlip from "../components/PrintSlip";
 function Home() {
   return (
     <>
@@ -12,6 +13,7 @@ function Home() {
           </div>
           <div className="w-5/6  body-scroll">
             {/* <Graph/> */}
+            <PrintSlip/>
        
           </div>
         </div>

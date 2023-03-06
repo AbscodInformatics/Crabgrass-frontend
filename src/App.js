@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import PrintSlip from "./components/PrintSlip";
 import productContext from "./Context/appContext";
 import Routing from "./pages/Routing";
 
@@ -14,6 +15,7 @@ function App() {
         }}
       >
         <Routing />
+        <PrintSlip/>
       </productContext.Provider>
     </>
   );

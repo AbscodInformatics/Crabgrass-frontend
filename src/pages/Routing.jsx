@@ -55,9 +55,7 @@ const Routing = () => {
         <Route path="/purchase/:id" element={<UpdatePurchase/>} />
         <Route path="/return/:id" element={<UpdateReturn/>} />
         <Route path="/user/:id" element={<UpdateUser/>} />
-
-
-
+        <Route path="/bill" element={<PrintSlip/>} />
       </Route>
     </Routes>
   );
