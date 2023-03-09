@@ -7,7 +7,7 @@ const Confirmation = ({onDialog}) => (
             <p className="py-4 text-base font-medium  dark:text-gray-100 text-gray-800">Are you sure want to delete this file!</p>
             <p className="text-sm font-medium  dark:text-gray-100 text-gray-600">Click Confirm for delete.</p>
             <div className="sm:flex items-center justify-between pt-6 ">
-                <button className="py-3.5 w-full  dark:text-gray-100 text-black leading-3 focus:outline-none hover:opacity-90 text-sm font-semibold border-gray-600 rounded  border bg-indigo-700 " onClick={()=>onDialog(true)}>Confirm</button>
+                <button className="py-3.5 w-full  dark:text-gray-100  leading-3 focus:outline-none hover:opacity-90 text-sm font-semibold border-gray-600 rounded  border bg-indigo-700 text-white" onClick={()=>onDialog(true)}>Confirm</button>
                 <button className="py-3.5 w-full sm:mt-0 mt-2 sm:ml-2 leading-3 text-black focus:outline-none hover:opacity-90 text-sm font-semibold border rounded border-indigo-700  " onClick={()=>onDialog(false)}>Cancel</button>
             </div>
         </div>

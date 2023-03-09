@@ -31,7 +31,7 @@ function SignIn() {
 
   const submitHandler = () => {
     fetch(`${process.env.REACT_APP_API_BASE_URL}/signin`, {
-  //  fetch("http://localhost:4000/signin", {
+      //  fetch("http://localhost:4000/signin", {
       method: "post",
       body: JSON.stringify(signInDetail),
       headers: {
@@ -40,14 +40,13 @@ function SignIn() {
     })
       .then((resp) => resp.json())
       .then((res) => {
-        if(res.sucess){
-        localStorage.setItem("signin", JSON.stringify(res.data));
-        navigate("/")
-        setShowLog(true)
-        }else{
+        if (res.sucess) {
+          localStorage.setItem("signin", JSON.stringify(res.data));
+          navigate("/");
+          setShowLog(true);
+        } else {
           setErr(true);
         }
-
       });
 
     // if (result.email === signInDetail.email) {
@@ -79,8 +78,8 @@ function SignIn() {
           />
         </svg> */}
         <img
-          className="w-36 bg-blue-700 rounded-lg"
-          src="Images/crabgrass.png"
+          className="w-44 rounded-lg "
+          src="Images/crabgrasss.png"
           alt="logo"
         />
         <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
@@ -92,7 +91,7 @@ function SignIn() {
             Login to your account
           </p>
 
-          <div className="w-full flex items-center justify-between py-16">
+          <div className="w-full flex items-center justify-between py-8">
             <hr className="w-full bg-gray-400" />
           </div>
           <div>

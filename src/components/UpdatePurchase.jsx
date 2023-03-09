@@ -17,13 +17,16 @@ function UpdatePurchase() {
   }, []);
 
   const updateApi = async (data) => {
-    let result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/purchase/${params.id}`, {
-      method: "PUT",
-      body: JSON.stringify(data),
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+    let result = await fetch(
+      `${process.env.REACT_APP_API_BASE_URL}/purchase/${params.id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    );
     result = await result.json();
     console.log("result", result);
     if (result.status) {
@@ -54,7 +57,9 @@ function UpdatePurchase() {
     });
 
   const apiData = async () => {
-    let result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/purchase/${params.id}`);
+    let result = await fetch(
+      `${process.env.REACT_APP_API_BASE_URL}/purchase/${params.id}`
+    );
     result = await result.json();
     setData(result);
     if (result) {
@@ -71,7 +76,6 @@ function UpdatePurchase() {
       values.size = result.size;
     }
   };
- 
 
   return (
     <>

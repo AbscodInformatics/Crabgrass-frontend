@@ -16,11 +16,12 @@ export default function Sidebar() {
         <div className="w-64  sm:ml-6 lg:ml-0 mt-0 pt-0 absolute sm:relative bg-black border-r sm:h-full flex-col justify-between hidden sm:flex">
           <div className="overflow-y-auto">
             <ul className="rounded  mt-8 pb-6">
-              <li className="focus:bg-blue-300  rounded flex w-full justify-between text-white leading-none cursor-pointer items-center py-3 px-4 hover:bg-blue-400 ">
-                <NavLink
+            <NavLink
                   to='/'
                   className="flex items-center rounded focus:outline-none   "
                 >
+              <li className="focus:bg-blue-300  rounded flex w-full  text-white leading-none cursor-pointer items-center py-3 px-4 hover:bg-blue-400 ">
+                
                   <svg
                     width={24}
                     height={24}
@@ -51,8 +52,8 @@ export default function Sidebar() {
                     />
                   </svg>
                   <span className="text-sm ml-2 ">Dashboard</span>
-                </NavLink>
               </li>
+                </NavLink>
               <li className="flex flex-col mt-2 w-full   text-white  cursor-pointer px-4 py-2 active:bg-blue-700 hover:bg-blue-400 ">
                 <div
                   onClick={() => setList(!list)}
@@ -408,7 +409,7 @@ export default function Sidebar() {
                 >
                   <a
                     href="javascript:void(0)"
-                    className="flex items-center rounded focus:outline-none focus:ring-2 focus:ring-white"
+                    className="flex items-center rounded focus:outline-none "
                   >
                     <svg
                       width={24}
@@ -449,6 +450,11 @@ export default function Sidebar() {
                     <li className="py-2 pl-8 hover:bg-blue-700 rounded cursor-pointer">
                       System Setting
                     </li>
+                    <NavLink to='/category'>
+                    <li className="py-2 pl-8 hover:bg-blue-700 rounded cursor-pointer">
+                      Add Category
+                    </li>
+                    </NavLink>
                   </ul>
                 )}
               </li>

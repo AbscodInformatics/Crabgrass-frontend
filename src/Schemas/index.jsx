@@ -3,7 +3,7 @@ import * as Yup from "yup";
 export const returnSchema = Yup.object({
   date: Yup.date().required("Enter Date"),
   product_name: Yup.string().min(3).max(20).required("Enter Product name"),
-  customer_name:Yup.string(),
+  customer_name:Yup.string().required('Enter Customer name'),
   product_category: Yup.string()
     .min(3)
     .max(20)

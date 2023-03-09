@@ -24,6 +24,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import UpdatePurchase from "../components/UpdatePurchase";
 import UpdateReturn from "../components/UpdateReturn";
 import UpdateUser from "../components/UpdateUser";
+import Category from "../components/Category";
 
 const Routing = () => {
   return (
@@ -52,10 +53,10 @@ const Routing = () => {
         <Route path="/bill" element={<PrintSlip />} />
         <Route path="/product/:id" element={<UpdateProduct />} />
         <Route path="/sale/:id" element={<UpdateSale />} />
-        <Route path="/purchase/:id" element={<UpdatePurchase/>} />
-        <Route path="/return/:id" element={<UpdateReturn/>} />
-        <Route path="/user/:id" element={<UpdateUser/>} />
-        <Route path="/bill" element={<PrintSlip/>} />
+        <Route path="/purchase/:id" element={<UpdatePurchase />} />
+        <Route path="/return/:id" element={<UpdateReturn />} />
+        <Route path="/user/:id" element={<UpdateUser />} />
+        <Route path="/category" element={<Category/>}/>
       </Route>
     </Routes>
   );

@@ -30,7 +30,7 @@ export default function Header() {
               <div className=" flex flex-row justify-between">
                 <div className=" flex space-x-3 items-center  lg:pl-7 sm:pl-6 py-6 pl-1 pr-4">
                   <img
-                    src="./Images/crabgrass.png"
+                    src="./Images/crabgrasss.png"
                     alt="logo"
                     className="w-24 pr-4 left-6 top-2 absolute "
                   />

@@ -4,22 +4,25 @@ import Barcode from "react-barcode";
 import { useReactToPrint } from "react-to-print";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+
 const PrintBarCode = () => {
   const componentRef = useRef();
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
   const [barShow, setBarShow] = useState(false);
   const [data, setData] = useState([]);
   const [cart, setCart] = useState([]);
   const [search, setSearch] = useState("");
   const [searchCart, setSearchCart] = useState();
 
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
   const updateHandler = () => {
     setBarShow(true);
   };
   const resetHandler = () => {
     setBarShow(false);
+    setCart([]);
   };
   useEffect(() => {
     const getData = async () => {
@@ -61,6 +64,12 @@ const PrintBarCode = () => {
     }
   };
 
+  const quantityHandler = (e, item) => {
+    console.log(e.target.value, item._id);
+    // let quant = {};
+    // setCart([...cart]);
+  };
+
   return (
     <div>
       <Header />
@@ -72,11 +81,25 @@ const PrintBarCode = () => {
           <div className="h-screen ">
             <div className="border-2   text-blue-900 text-lg font-bold flex justify-between">
               <h2 className="p-3">Print Barcode/Label</h2>
-              <div className="pt-3 px-3 border-l-2">
-                <FcPrint size={28} />
+              <div className="mr-8 mt-2 ">
+                <button
+                  className=" py-1 px-6 mr-8 bg-green-700 rounded shadow-black text-white   hover:bg-green-500"
+                  onClick={() => {
+                    updateHandler();
+                    printBarCode();
+                  }}
+                >
+                  Update
+                </button>
+                <button
+                  className=" py-1 px-6 bg-red-700 rounded shadow-black text-white text-m hover:bg-red-500"
+                  onClick={() => resetHandler()}
+                >
+                  Reset
+                </button>
               </div>
             </div>
-            <div className="border-2 h-2/3 m-8 bg-gray-100">
+            <div className="border-2 h-2/3 m-8 bg-gray-100 flex flex-col justify-evenly">
               <div className=" border-2 my-8 mx-12 relative">
                 <input
                   type="text"
@@ -90,16 +113,14 @@ const PrintBarCode = () => {
                     return (
                       <div
                         style={{
-                          zIndex: "2",
+                          zIndex: "3",
                           top: "50px",
                           position: "absolute",
                           background: "white",
                           width: "100%",
                           border: "1px solid light-gray",
-                          overflow: "auto",
+
                           padding: "5px",
-                          Height: "40px",
-                          overflowY: "scroll",
                         }}
                       >
                         <p onClick={() => addHandler(item._id)}>
@@ -124,7 +145,7 @@ const PrintBarCode = () => {
                   })}
                 </select>
               </div>
-              <div className="border-2 my-8 mx-12 ">
+              <div className="border-2 my-8 mx-12 h-auto">
                 <div className="border-2 h-3/5 dark:bg-gray-800">
                   <table className="min-w-full bg-white dark:bg-gray-800 rounded">
                     <thead>
@@ -143,7 +164,7 @@ const PrintBarCode = () => {
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="max-h-20 border-2">
                       {cart?.map((item, id) => {
                         return (
                           <tr
@@ -156,12 +177,14 @@ const PrintBarCode = () => {
                             <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
                               <input
                                 type="number"
+                                name="quantity"
                                 placeholder="Quantity"
                                 className="p-2 border-2 w-24 border-black"
+                                onChange={(e) => quantityHandler(e, item)}
                               />
                             </td>
                             <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-                              {item.category_name}
+                              {item.size}
                             </td>
 
                             <td>
@@ -197,26 +220,9 @@ const PrintBarCode = () => {
                   </table>
                 </div>
               </div>
-              <div className="m-12  ">
-                <button
-                  className="border-2 py-3 px-9 mr-8 bg-green-700 rounded shadow-black text-white text-lg"
-                  onClick={() => {
-                    updateHandler();
-                    printBarCode();
-                  }}
-                >
-                  Update
-                </button>
-                <button
-                  className="border-2 py-3 px-10 bg-red-700 rounded shadow-black text-white text-lg"
-                  onClick={() => resetHandler()}
-                >
-                  Reset
-                </button>
-              </div>
             </div>
             {barShow && (
-              <div className="mx-9 border-2 bg-gray-100 h-4/5">
+              <div className="mx-9 border-2 bg-gray-100 ">
                 <div className="m-4 ">
                   <button
                     onClick={handlePrint}
@@ -231,13 +237,6 @@ const PrintBarCode = () => {
                   style={{ width: "384.96px" }}
                 >
                   {cart.map((item) => {
-                    {
-                      /* console.log(typeof(item._id)) */
-                    }
-                    {
-                      /* let dummy=item._id.slice(15,-1) */
-                    }
-
                     return (
                       <div
                         className="    flex justify-center item-center my-6  bg-white "

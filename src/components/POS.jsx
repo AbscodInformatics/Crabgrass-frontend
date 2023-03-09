@@ -1,10 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { BiRightArrow, BiDownArrow } from "react-icons/bi";
 import { AiOutlineHome } from "react-icons/ai";
 import { NavLink, useNavigate } from "react-router-dom";
+import PrintSlip from "./PrintSlip";
+import productContext from "../Context/appContext";
 
 function POS() {
-  const navigate=useNavigate()
+  const { billcart, setBillCart } = useContext(productContext);
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [cart, setCart] = useState([]);
   const [searchData, setSearchData] = useState("");
@@ -12,7 +15,6 @@ function POS() {
   const [customer, setCustomer] = useState("");
   const [totalAmount, setTotalAmount] = useState(0);
   const [qty, setqty] = useState(0);
-  const [slipShow, setSlipShow] = useState(false);
 
   useEffect(() => {
     getData();
@@ -24,25 +26,37 @@ function POS() {
     setData([...result]);
   };
 
+  // console.log(data);
+
   const addHandler = () => {
     let dummyData = searchData.toLowerCase();
-    let filterData = data.filter(
-      (item) => item.product_name.toLowerCase() === dummyData
-    );
-    if (filterData.length >= 1) {
-      let dummy = filterData[0];
-      setCart([...cart, dummy]);
-      setqty(qty + 1);
-      setTotalAmount(totalAmount + Number(dummy.price));
-    } else {
-      alert("Product not found");
-    }
-    setSearchData("");
+
+    let filterData = data.filter((item) => {
+      if (item.product_name.toLowerCase().includes(dummyData)){
+        return {
+          ...item,
+          purchase_qty: 1,
+        };
+      }
+    });
+
+    console.log("filterData", filterData);
+
+    // if (filterData.length) {
+    //   setCart([...cart, ...filterData]);
+    // } else {
+    //   alert("Data not found");
+    // }
   };
+
   const deleteHandle = (id) => {
     let dummyData = cart.filter((item) => item._id !== id);
     setCart([...dummyData]);
   };
+
+  useEffect(() => {
+    setBillCart([...cart]);
+  }, [cart]);
 
   return (
     <div className="flex flex-col h-screen ">
@@ -53,10 +67,7 @@ function POS() {
               Point Of Sale
             </div>
             <h3 className=" absolute right-5 text-white cursor-pointer">
-              <NavLink
-                className="flex justify-center items-center"
-                to="/dashboard"
-              >
+              <NavLink className="flex justify-center items-center" to="/">
                 <AiOutlineHome size={18} />
                 <span className="pl-1 pb-1  ">Home</span>
               </NavLink>
@@ -146,7 +157,7 @@ function POS() {
                         {item.price}
                       </td>
                       <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-                        1
+                        {item?.purchase_qty}
                       </td>
                       <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
                         {item.price}
@@ -197,7 +208,7 @@ function POS() {
             </div>
             <div className=" flex justify-center w-full mr-14 mt-4 sm:mt-0 md:mt-5 lg:mt-0">
               <button
-                onClick={() => navigate('/bill')}
+                onClick={() => navigate("/bill")}
                 className=" w-full m-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-4 text-base md:text-xl"
               >
                 Payment
@@ -208,6 +219,7 @@ function POS() {
         <div className="ml-4" style={{}}>
           <div></div>
           <h1>HEllo</h1>
+          <PrintSlip />
         </div>
       </div>
     </div>

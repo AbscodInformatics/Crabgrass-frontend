@@ -23,7 +23,7 @@ function ListReturn() {
     let result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/return`);
     result = await result.json();
     setApiData(result);
-    setLoader(false)
+    setLoader(false);
     setData(result);
   };
   // console.log("result", data);
@@ -77,7 +77,7 @@ function ListReturn() {
               <div className="px-4 md:px-10 py-4 md:py-7">
                 <div className="lg:flex items-center justify-between">
                   <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
-                    Return List:-
+                    Return List
                   </p>
                   <div className="md:flex items-center mt-6 lg:mt-0">
                     <div className="flex items-center">
@@ -142,13 +142,13 @@ function ListReturn() {
                       <th className="font-normal text-left pl-11">Date </th>
 
                       <th className="font-normal text-left pl-11">Product </th>
-                      <th className="font-normal text-left pl-11">Customer </th>
+                      <th className="font-normal text-left ">Customer </th>
 
-                      <th className="font-normal text-left pl-2">Category</th>
-                      <th className="font-normal text-left">Sub-Category</th>
-                      <th className="font-normal text-left">Price</th>
-                      <th className="font-normal text-left">Quantity</th>
-                      <th className="font-normal text-left w-32">Size</th>
+                      <th className="font-normal text-left pl-0">Category</th>
+                      <th className="font-normal text-left pl-4">Sub-Category</th>
+                      <th className="font-normal text-left pl-6">Price</th>
+                      <th className="font-normal text-left pl-2">Quantity</th>
+                      <th className="font-normal text-left w-32 pl-4">Size</th>
 
                       <th className="font-normal text-left w-32">Action</th>
                     </tr>
@@ -161,17 +161,20 @@ function ListReturn() {
                           className="h-10 text-sm leading-none text-gray-700 border-b border-t border-gray-200 bg-white hover:bg-gray-100"
                         >
                           <td className="pl-4">{id + 1}</td>
-                          <td className="pl-11">
+                          <td className="pl-6">
                             <div className="flex items-center">{item.date}</div>
                           </td>
                           <td>
-                            <p className="mr-16 pl-10">{item.product_name}</p>
+                            <p className="mr-8 pl-10">{item.product_name}</p>
                           </td>
                           <td>
-                            <p className="mr-16">{item.product_category}</p>
+                            <p className="mr-6">{item.customer_name}</p>
                           </td>
                           <td>
-                            <p className="mr-16">{item.sub_category}</p>
+                            <p className="mr-8">{item.product_category}</p>
+                          </td>
+                          <td>
+                            <p className="pl-5">{item.sub_category}</p>
                           </td>
                           <td>
                             <div className="w-20 h-6 flex items-center mr-16 justify-center ">

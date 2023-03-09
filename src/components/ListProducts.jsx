@@ -140,15 +140,15 @@ function ListProducts() {
                   <thead className="">
                     <tr className="h-10 w-full text-l font-500 leading-none text-black bg-blue-400 ">
                       <th className="font-normal text-left pl-4">#</th>
-                      <th className="font-normal text-left pl-11">Date </th>
+                      <th className="font-normal text-left pl-14">Date </th>
 
                       <th className="font-normal text-left pl-11">Product </th>
-                      <th className="font-normal text-left pl-2">Category</th>
+                      <th className="font-normal text-left pl-1">Category</th>
                       <th className="font-normal text-left">Sub-Category</th>
-                      <th className="font-normal text-left">Price</th>
-                      <th className="font-normal text-left">Quantity</th>
-                      <th className="font-normal text-left w-32">Size</th>
-                      <th className="font-normal text-left w-32">Action</th>
+                      <th className="font-normal text-left pl-6">Price</th>
+                      <th className="font-normal text-left pl-4">Quantity</th>
+                      <th className="font-normal text-left w-32 pl-6">Size</th>
+                      <th className="font-normal text-left w-32 pl-12">Action</th>
                     </tr>
                   </thead>
                   <tbody className="w-full">
@@ -166,10 +166,10 @@ function ListProducts() {
                             <p className="mr-16 pl-10">{item.product_name}</p>
                           </td>
                           <td>
-                            <p className="mr-16">{item.product_category}</p>
+                            <p className="mr-16 pl-6">{item.product_category}</p>
                           </td>
                           <td>
-                            <p className="mr-16">{item.sub_category}</p>
+                            <p className="mr-16 pl-2">{item.sub_category}</p>
                           </td>
                           <td>
                             <div className="w-20 h-6 flex items-center mr-16 justify-center ">

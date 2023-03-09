@@ -2,6 +2,7 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Graph from "../components/Graph";
 import PrintSlip from "../components/PrintSlip";
+import SignIn from '../components/SignIn'
 function Home() {
   return (
     <>
@@ -13,8 +14,8 @@ function Home() {
           </div>
           <div className="w-5/6  body-scroll">
             {/* <Graph/> */}
-            <PrintSlip/>
-       
+            {/* <PrintSlip/> */}
+            <SignIn/>
           </div>
         </div>
       </div>
