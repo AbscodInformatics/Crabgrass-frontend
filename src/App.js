@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import productContext from "./Context/appContext";
 import Routing from "./pages/Routing";
+import BarcodeScanner from './barcode/BarcodeScanner'
 
 function App() {
   const [showLog, setShowLog] = useState(false);
@@ -17,6 +18,7 @@ function App() {
         }}
       >
         <Routing />
+        <BarcodeScanner/>
       </productContext.Provider>
     </>
   );

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useContext } from "react";
 import productContext from "../Context/appContext";
+import Loading from "./Loading";
 
 function SignIn() {
   const { showLog, setShowLog } = useContext(productContext);
@@ -12,6 +13,7 @@ function SignIn() {
   const [err, setErr] = useState(false);
   const [type, setType] = useState("password");
   const [value, setValue] = useState(true);
+  const [loader, setLoader] = useState(false);
 
   const handlePassword = (val) => {
     if (val === true) {
@@ -29,25 +31,25 @@ function SignIn() {
   };
   // console.log(signInDetail)
 
-  const submitHandler = () => {
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/signin`, {
+  const submitHandler = async () => {
+    setLoader(true);
+    let result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/signin`, {
       //  fetch("http://localhost:4000/signin", {
       method: "post",
       body: JSON.stringify(signInDetail),
       headers: {
         "content-type": "application/json",
       },
-    })
-      .then((resp) => resp.json())
-      .then((res) => {
-        if (res.sucess) {
-          localStorage.setItem("signin", JSON.stringify(res.data));
-          navigate("/");
-          setShowLog(true);
-        } else {
-          setErr(true);
-        }
-      });
+    });
+    result = await result.json();
+    if (result) {
+      localStorage.setItem("signin", JSON.stringify(result.data));
+      navigate("/");
+      setShowLog(true);
+      loader(false);
+    } else {
+      setErr(true);
+    }
 
     // if (result.email === signInDetail.email) {
     //   localStorage.setItem("signin", JSON.stringify(result,true));
@@ -60,6 +62,7 @@ function SignIn() {
 
   return (
     <div className="bg-gradient-to-tl from-green-400 to-indigo-900 w-full h-screen px-4">
+    
       <div className="flex flex-col items-center justify-center p-4">
         {/* <svg
           width={188}
@@ -82,7 +85,7 @@ function SignIn() {
           src="Images/crabgrasss.png"
           alt="logo"
         />
-        <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
+        <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16 relative">
           <p
             tabIndex={0}
             aria-label="Login to your account"
@@ -95,6 +98,11 @@ function SignIn() {
             <hr className="w-full bg-gray-400" />
           </div>
           <div>
+          {
+            loader && <div className="absolute top-30 ml-40" >
+            <Loading/>
+            </div>
+          }
             <lable className="text-sm font-medium leading-none text-gray-800">
               Email
             </lable>

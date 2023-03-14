@@ -26,28 +26,32 @@ function POS() {
     setData([...result]);
   };
 
-  // console.log(data);
+  console.log(data);
 
   const addHandler = () => {
     let dummyData = searchData.toLowerCase();
 
     let filterData = data.filter((item) => {
-      if (item.product_name.toLowerCase().includes(dummyData)){
-        return {
-          ...item,
-          purchase_qty: 1,
-        };
-      }
+      return item.product_name.toLowerCase()===dummyData;
     });
 
-    console.log("filterData", filterData);
+    // console.log("filterData", filterData);
 
-    // if (filterData.length) {
-    //   setCart([...cart, ...filterData]);
-    // } else {
-    //   alert("Data not found");
-    // }
+    // let dummy = {
+    //   ...filterData,
+    //   purchase_qty: 1,
+    // };
+    // console.log('dummy',dummy)
+
+    if (filterData.length) {
+      setCart([...cart,...filterData]);
+    } else {
+      alert("Data not found");
+    }
+    console.log("cart", cart);
   };
+
+  console.log("cart", cart);
 
   const deleteHandle = (id) => {
     let dummyData = cart.filter((item) => item._id !== id);

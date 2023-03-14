@@ -10,13 +10,14 @@ function Loading() {
   let [color, setColor] = useState("#A12623");
 
   return (
-    <div className="sweet-loading   m-auto">
+    <div className="sweet-loading dotted  m-auto">
       <ClipLoader
         color={color}
         loading={loading}
         size={100}
         aria-label="Loading Spinner"
         data-testid="loader"
+        
       />
     </div>
   );

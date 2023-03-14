@@ -1,32 +1,29 @@
 import React, { useContext, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import {AiOutlineLogout} from 'react-icons/ai'
-import {ImProfile} from 'react-icons/im'
-import Notification from './alerts/Notificaion'
-import productContext from '../Context/appContext'
-
+import { AiOutlineLogout } from "react-icons/ai";
+import { ImProfile } from "react-icons/im";
+import Notification from "./alerts/Notificaion";
+import productContext from "../Context/appContext";
 
 export default function Header() {
-    const navigate=useNavigate()
+  const navigate = useNavigate();
   const { showLog, setShowLog } = useContext(productContext);
 
   const [rotate, setRotate] = useState(false);
   const [show, setShow] = useState(false);
   const auth = JSON.parse(localStorage.getItem("signin"));
-  const logout=()=>{
-    localStorage.clear('signin')
-    navigate('/login')
-  }
+  const logout = () => {
+    localStorage.clear("signin");
+    navigate("/login");
+  };
 
   return (
-
     <div className=" bg-black text-white">
       <div className=" h-full relative">
         <div className="bg-black text-white">
           <div className="2xl:container 2xl:mx-auto">
             <nav className="h-16">
-
               <div className=" flex flex-row justify-between">
                 <div className=" flex space-x-3 items-center  lg:pl-7 sm:pl-6 py-6 pl-1 pr-4">
                   <img
@@ -47,12 +44,19 @@ export default function Header() {
                     </h3>
                   </div>
                 </div>
-                <button className="absolute right-72 mt-3 px-8 py-2 border-2 flex justify-center items-center rounded bg-indigo-500 " onClick={()=>navigate('/pos')}>POS</button>
+                <button
+                  className="absolute right-72 mt-3 px-8 py-2 border-2 flex justify-center items-center rounded bg-indigo-500 "
+                  onClick={() => navigate("/pos")}
+                >
+                  POS
+                </button>
                 <div className=" hidden sm:flex justify-end flex-row lg:pr-0 sm:pr-6 py-2 pr-2 pl-8 ">
-                
-                  <div onClick={() => setRotate(!rotate)} className=" cursor-pointer flex justify-center items-center flex-row pb-7 pr-0 right-6 absolute pt-2">
+                  <div
+                    onClick={() => setRotate(!rotate)}
+                    className=" cursor-pointer flex justify-center items-center flex-row pb-7 pr-0 right-6 absolute pt-2"
+                  >
                     <FaUserCircle size={25} />
-                    <div className="ml-2" >
+                    <div className="ml-2">
                       <p className="text-lg leading-4 font-semibold text-white">
                         {auth.name}
                       </p>
@@ -61,7 +65,6 @@ export default function Header() {
                       </p>
                     </div>
                     <svg
-                      
                       className={`${
                         rotate ? "rotate-180" : ""
                       } cursor-pointer transform duration-100 xl:ml-7 lg:ml-3.5 ml-2 text-white focus:outline-none focus:ring focus:ring-offset-2 focus:ring-white`}
@@ -79,15 +82,24 @@ export default function Header() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    {
-                        rotate ? <div className="absolute z-10 top-14 w-36  h-40 rounded  bg-black text-white flex flex-col justify-evenly   ">
-                        <div className="cursor-pointer p-2  flex items-center "> <FaUserCircle/> <b className="pl-3 text-red-500">Hi,{auth.name}</b></div>
-                        <div className="cursor-pointer p-2 flex  items-center "> <ImProfile/><span className="pl-3">Profile</span></div>
-                        <div onClick={()=>logout()} className="cursor-pointer p-2 flex items-center px-2"> <AiOutlineLogout/><span className="pl-3">Logout</span></div>
-                        </div> :null
-                    }
+                    {rotate ? (
+                      <div className="absolute z-10 top-14 w-36  h-30 rounded  bg-black text-white flex flex-col justify-evenly   ">
+                        <div className="cursor-pointer p-2  flex items-center ">
+                          {" "}
+                          <FaUserCircle />{" "}
+                          <b className="pl-3 text-red-500">Hi,{auth.name}</b>
+                        </div>
+                        <div
+                          onClick={() => logout()}
+                          className="cursor-pointer p-2 flex items-center px-2"
+                        >
+                          {" "}
+                          <AiOutlineLogout />
+                          <span className="pl-3">Logout</span>
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
-
                 </div>
                 {/* Burger Icon */}
                 <div
@@ -307,7 +319,7 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <Notification show={showLog} setShow={setShowLog} value={`Hi, ${auth.name} Login Successfully!`} msg={'Welcome to our Crabgrass dashboard now you can use our Services. Thank you!'}/>
+     
     </div>
   );
 }

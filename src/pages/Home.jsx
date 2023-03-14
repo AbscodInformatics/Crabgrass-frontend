@@ -13,9 +13,8 @@ function Home() {
             <Sidebar />
           </div>
           <div className="w-5/6  body-scroll">
-            {/* <Graph/> */}
-            {/* <PrintSlip/> */}
-            <SignIn/>
+            
+        
           </div>
         </div>
       </div>
