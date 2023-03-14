@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import Graph from "../components/Graph";
 import PrintSlip from "../components/PrintSlip";
 import SignIn from '../components/SignIn'
+import BarcodeScanner from "../barcode/BarcodeScanner";
 function Home() {
   return (
     <>
@@ -14,7 +15,7 @@ function Home() {
           </div>
           <div className="w-5/6  body-scroll">
             
-        
+           <BarcodeScanner/>
           </div>
         </div>
       </div>

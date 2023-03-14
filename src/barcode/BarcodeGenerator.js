@@ -4,7 +4,6 @@ const BarcodeGenerator = ({barCode}) => {
   
   return (
     <div >
-      
       <div >
        <Barcode value={barCode} />
       </div>
